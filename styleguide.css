@@ -1,0 +1,51 @@
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --wild-sand: #f2f4f7;
+
+  --font-size-l: 18px;
+  --font-size-m: 16px;
+  --font-size-xl: 20px;
+  --font-size-xxl: 25px;
+  --font-size-xxxl: 30px;
+  --font-size-xxxxl: 50px;
+  --font-size-xxxxxl: 80px;
+
+  --font-family-apercu_pro-medium: "Apercu Pro-Medium", Helvetica;
+  --font-family-apercu_pro-regular: "Apercu Pro-Regular", Helvetica;
+}
+.apercupro-medium-black-16px {
+  color: var(--black);
+  font-family: var(--font-family-apercu_pro-medium);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
+}
+.apercupro-medium-white-20px {
+  color: var(--white);
+  font-family: var(--font-family-apercu_pro-medium);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 500;
+}
+.apercupro-regular-normal-black-16px {
+  color: var(--black);
+  font-family: var(--font-family-apercu_pro-regular);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 400;
+}
+.apercupro-medium-black-30px {
+  color: var(--black);
+  font-family: var(--font-family-apercu_pro-medium);
+  font-size: var(--font-size-xxxl);
+  font-style: normal;
+  font-weight: 500;
+}
+.apercupro-medium-black-20px {
+  color: var(--black);
+  font-family: var(--font-family-apercu_pro-medium);
+  font-size: var(--font-size-xl);
+  font-style: normal;
+  font-weight: 500;
+}

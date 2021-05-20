@@ -1,0 +1,99 @@
+.button-skeleton {
+  align-items: center;
+  background-color: var(--black);
+  border-radius: 12px;
+  display: flex;
+  height: 60px;
+  margin-left: 16px;
+  mix-blend-mode: normal;
+  overflow: hidden;
+  padding: 0 22px;
+  width: 110px;
+}
+.g-nft {
+  left: 0;
+  letter-spacing: 0;
+  line-height: 26px;
+  mix-blend-mode: normal;
+  position: absolute;
+  top: 42px;
+  width: 78px;
+}
+.overlap-group1 {
+  height: 93px;
+  margin-left: 37px;
+  position: relative;
+  width: 1770px;
+}
+.results {
+  align-self: center;
+  height: 1050px;
+  margin-top: 18px;
+  mix-blend-mode: normal;
+  width: 1694px;
+}
+.scifi {
+  align-self: center;
+  letter-spacing: 0;
+  line-height: 26px;
+  margin-left: 10px;
+  min-height: 26px;
+  min-width: 562px;
+  mix-blend-mode: normal;
+  white-space: nowrap;
+  width: 562px;
+}
+.search-skeleton {
+  letter-spacing: 0;
+  line-height: 26px;
+  min-height: 26px;
+  min-width: 64px;
+  mix-blend-mode: normal;
+  white-space: nowrap;
+}
+.search-box-skeleton {
+  align-items: flex-start;
+  background-color: var(--wild-sand);
+  border-radius: 12px;
+  display: flex;
+  height: 60px;
+  mix-blend-mode: normal;
+  overflow: hidden;
+  padding: 16.7px 22.0px;
+  width: 642px;
+}
+.search-components-skeleton {
+  align-items: flex-start;
+  display: flex;
+  width: 768px;
+}
+.search-icon-skeleton {
+  height: 25px;
+  mix-blend-mode: normal;
+  width: 24px;
+}
+.search-module-skeleton {
+  align-items: flex-end;
+  background-color: var(--white);
+  border-radius: 20px;
+  display: flex;
+  height: 93px;
+  left: 76px;
+  mix-blend-mode: normal;
+  overflow: hidden;
+  padding: 9px 46px;
+  position: absolute;
+  top: 0;
+  width: 1694px;
+}
+.skeleton-loader {
+  align-items: flex-start;
+  background-color: var(--white);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 1280px;
+  mix-blend-mode: normal;
+  position: relative;
+  width: 1920px;
+}
