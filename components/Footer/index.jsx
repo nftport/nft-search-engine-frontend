@@ -2,19 +2,26 @@ import React from "react";
 import "./Footer.css";
 
 function Footer(props) {
-  const { line4, combinedShape, text1, place, privacyPolicy, className } = props;
 
   return (
-    <div className={`footer ${className || ""}`}>
-      <img className="line-4" src={line4} />
+    <div className="footer">
+      <img className="line-4" src="https://storage.googleapis.com/nft-search/img/line-4%401x.svg"/>
       <div className="flex-row-footer">
-        <img className="combined-shape" src={combinedShape} />
-        <div className="overlap-group-footer">
-          <div className="link"/>
-          <p className="text-1 valign-text-middle apercupro-regular-normal-black-16px">{text1}</p>
+        <a href="https://twitter.com/Sentinel_AI" target="_blank">
+          <img className="combined-shape" src="https://storage.googleapis.com/nft-search/img/combined-shape%402x.svg"/>
+        </a>
+        <div className="overlap-group-footer valign-text-middle">
+          <div className="text-1 valign-text-middle apercupro-regular-normal-black-16px">Copyright (c) 2021 gNFT. All
+            rights reserved.
+          </div>
         </div>
-        <div className="place valign-text-middle apercupro-medium-black-16px">{place}</div>
-        <div className="privacy-policy valign-text-middle apercupro-medium-black-16px">{privacyPolicy}</div>
+        <div className="place valign-text-middle apercupro-medium-black-16px"><a
+          href="mailto:info@thesentinel.ai">Contact</a></div>
+        <div className="privacy-policy valign-text-middle apercupro-medium-black-16px">
+          <a href="/privacy-policy">
+            Privacy Policy
+          </a>
+        </div>
       </div>
     </div>
   );

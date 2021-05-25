@@ -1,124 +1,98 @@
 import React from "react";
 import Footer from "../Footer";
 import "./Results.css";
-import {
-  useParams
-} from "react-router-dom";
+import SearchResults from "./SearchResults";
+import search from "./SearchQuery";
+import SkeletonLoader from "./SkeletonLoader";
 
 
-function GetDiv(searchResults) {
-  console.log("GetDiv")
-  console.log(searchResults)
-  return <>
-    {searchResults.map((result, index) => (
-      <div className="photography" key={index}>
-        <img className="image-14" src={result.image_url}/>
-        <div className="viktoria-bolonina">title</div>
-        <div className="beeple">aa</div>
-      </div>
-    ))}
-  </>;
-}
+class Results extends React.Component {
+  params = null
 
-function Results(props) {
-  let params = useParams()
+  state = {
+    searchQuery: "",
+    searching: false,
+    reason: null
+  }
+  searchResults = null
 
-  const state = {}
-  let searchResults = null
-
-  const pagination = {
+  pagination = {
     pageNumber: 1,
-    pageSize: 20
+    pageSize: 50
   }
 
-  if (params && params.query) {
-    searchImages(params.query, pagination)
-    // state.value = params.query
+  componentDidMount() {
+    let urlSplit = window.location.href.split("results/");
+    if (urlSplit && urlSplit.length) {
+      this.state.searchQuery = urlSplit[urlSplit.length - 1]
+      // this.searching = true
+      this.setState({searching: true})
+      search(this.state.searchQuery, this.pagination, this.setSearchResults)
+    }
   }
 
-  function handleChange(event) {
-    state.value = event.target.value
-    console.log(state)
+  componentDidUpdate(prevProps, prevState, snapshot) {
+
   }
 
-  function handleSubmit(event) {
+  setSearchResults = (searchResults, reason) => {
+    // TODO: uncomment
+    this.searchResults = searchResults
+    this.setState({searching: false})
+    this.setState({reason: reason})
+    this.setState(this.searchResults)
+  }
+
+
+  handleFormInputChange = (event) => {
+    this.state.searchQuery = event.target.value
+    this.setState(this.state)
+  }
+
+  handleSubmit = async (event) => {
     event.preventDefault();
-    // history.push("/results/" + state.value);
-    console.log("handle submit")
+    this.setState({searching: true})
+    search(this.state.searchQuery, this.pagination, this.setSearchResults)
   }
 
-  function searchImages(query, pagination) {
-    fetch("http://0.0.0.0:80/search", {
-      method: "POST",
-      body: JSON.stringify({
-        query: query,
-        page_size: pagination.pageSize,
-        page_number: pagination.pageNumber
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
-      .then(response => response.json())
-      .then(json => {
-        console.log("response")
-        console.log(json)
-        if (json && json.images) {
-          searchResults = []
-          json.images.forEach(imageObject => {
-            searchResults.push(imageObject)
-          })
 
-          console.log("searchResults")
-          console.log(searchResults)
-        }
-      });
-  }
-
-  const {gnft, searchIcon, scifi, search, overlapGroup, image14, viktoriaBolonina, beeple, footerProps} = props;
-
-  return (
-    <div className="container-center-horizontal">
-      <div className="results screen">
+  render() {
+    return (
+      <>
         <div className="overlap-group2">
-          <div className="g-nft apercupro-medium-black-30px">{gnft}</div>
-          <div className="search-module-results">
-            <div className="search-components-results">
-              <div className="search-box-results">
-                <img className="search-icon-results" src={searchIcon}/>
-                <input
-                  className="search-all-nfts-results"
-                  placeholder="Search all NFTs"
-                  value={state.value} onChange={handleChange}
-                />
-              </div>
-              <div className="button-results">
-                <div className="search-results apercupro-medium-white-20px">{search}</div>
+          <div className="g-nft apercupro-medium-black-30px"><a href="/">gNFT</a></div>
+          <form onSubmit={this.handleSubmit}>
+            <div className="search-module-results">
+              <div className="search-components-results">
+                <div className="search-box-results">
+                  <img className="search-icon-results"
+                       src="https://storage.googleapis.com/nft-search/img/search-icon%402x.svg"/>
+                  <input
+                    className="search-all-nfts-results"
+                    placeholder="Search by keywords or image URL"
+                    value={this.state.searchQuery} onChange={this.handleFormInputChange}
+                  />
+                </div>
+                <input type="submit" value="Search"
+                       className="button-results search-results apercupro-medium-white-20px"/>
               </div>
             </div>
+          </form>
+        </div>
+        <div className="container-center-horizontal">
+          <div className="results screen">
+
+            {this.state.searching
+              ? <SkeletonLoader/>
+              : <SearchResults searchResults={this.searchResults} reason={this.state.reason}/>
+            }
           </div>
         </div>
-        <div id="results" className="overlap-group-results">
-          {searchResults != null && <h2> jo </h2>}
+        <Footer/>
+      </>
 
-          {/*<div className="photography">*/}
-          {/*  <img className="image-14" src={image14}/>*/}
-          {/*  <div className="viktoria-bolonina">{viktoriaBolonina}</div>*/}
-          {/*  <div className="beeple">{beeple}</div>*/}
-          {/*</div>*/}
-          {/*{getDiv(searchResults)}*/}
-        </div>
-        <Footer
-          line4={footerProps.line4}
-          combinedShape={footerProps.combinedShape}
-          text1={footerProps.text1}
-          place={footerProps.place}
-          privacyPolicy={footerProps.privacyPolicy}
-          className="footer"
-        />
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Results;

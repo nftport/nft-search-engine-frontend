@@ -1,8 +1,7 @@
 import React from "react";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import "./MainPage.css";
 import Footer from "../Footer";
-import {useState} from 'react';
 
 
 function MainPage(props) {
@@ -21,38 +20,27 @@ function MainPage(props) {
   }
 
   const {
-    image2,
-    image3,
+    landingImages,
     searchIcon,
-    image16,
-    image4,
-    image5,
-    image7,
-    image11,
-    image6,
-    image8,
-    image12,
-    image9,
-    image13,
-    image10,
-    line4,
+    cameraImage,
     combinedShape,
   } = props;
 
 
   return (
-    <div className="container-center-horizontal">
+    <>
+      <div className="container-center-horizontal">
       <div className="main-page screen">
         <div className="flex-row">
           <div className="flex-col-1">
             <div className="g-nft-i62631055">gNFT</div>
-            <img className="image-2" src={image2}/>
-            <img className="image-3" src={image3}/>
+            <img className="image-2" src={landingImages[0]}/>
+            <img className="image-3" src={landingImages[1]}/>
           </div>
           <div className="flex-col-6">
             <div className="flex-col-7">
               <h1 className="text-2">Google for NFTs</h1>
-              <div className="google-for-nf-ts-i62">Visual & Reverse Image Search for 20M+ NFTs</div>
+              <div className="google-for-nf-ts-i62">Visual & Reverse Image Search for 2M NFTs</div>
 
               <form onSubmit={handleSubmit}>
                 <div className="search-module">
@@ -62,10 +50,10 @@ function MainPage(props) {
                       <img className="search-icon" src={searchIcon}/>
                       <input
                         className="search-all-nfts"
-                        placeholder="Search all NFTs"
+                        placeholder="Search by keywords or image URL"
                         value={state.value} onChange={handleChange}
                       />
-                      <img className="image-16" src={image16}/>
+                      <img className="image-16" src={cameraImage}/>
                     </div>
                     <input type="submit" value="Search" className="button search apercupro-medium-white-20px"/>
                   </div>
@@ -75,42 +63,38 @@ function MainPage(props) {
             </div>
             <div className="flex-row-2">
               <div className="flex-col-4">
-                <img className="image-4" src={image4}/>
-                <img className="image-5" src={image5}/>
+                <img className="image-4" src={landingImages[2]}/>
+                <img className="image-5" src={landingImages[3]}/>
               </div>
               <div className="flex-col-5">
-                <img className="image-" src={image7}/>
-                <img className="image-11" src={image11}/>
+                <img className="image-" src={landingImages[4]}/>
+                <img className="image-11" src={landingImages[5]}/>
               </div>
-              <img className="image-6" src={image6}/>
+              <img className="image-6" src={landingImages[6]}/>
               <div className="flex-col-3">
-                <img className="image-" src={image8}/>
-                <img className="image-12" src={image12}/>
+                <img className="image-" src={landingImages[7]}/>
+                <img className="image-12" src={landingImages[8]}/>
               </div>
               <div className="flex-col-2">
-                <img className="image-" src={image9}/>
-                <img className="image-13" src={image13}/>
+                <img className="image-" src={landingImages[9]}/>
+                <img className="image-13" src={landingImages[10]}/>
               </div>
             </div>
           </div>
           <div className="flex-col">
             <div className="overlap-group button">
-              <div className="get-api-access">GET API ACCESS</div>
+              <div className="get-api-access"><a href="mailto:info@thesentinel.ai" style={{color:"white"}}>GET API ACCESS</a>
+              </div>
             </div>
-            <img className="image-10" src={image10}/>
+            <img className="image-10" src={landingImages[11]}/>
+            <img className="screenshot-2021-05-17-at-1103-1" src={landingImages[12]}/>
           </div>
         </div>
-        <Footer
-          line4={line4}
-          combinedShape={combinedShape}
-          text1="Copyright (c) 2021 gNFT. All rights reserved."
-          place="Contact"
-          privacyPolicy="Privacy Policy"
-          className="footer"
-        />
       </div>
     </div>
-  );
+    <Footer/>
+    </>
+);
 }
 
 export default MainPage;

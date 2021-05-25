@@ -83,3 +83,6 @@
   white-space: nowrap;
   width: 309px;
 }
+.footer a {
+  color: var(--black)
+}

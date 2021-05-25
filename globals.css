@@ -27,7 +27,7 @@
   pointer-events: auto;
   flex-shrink: 0;
 }
-.screen a {
+a {
   text-decoration: none;
   display: contents;
 }
@@ -39,4 +39,7 @@
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #999faa;
   opacity: 1; /* Firefox */
+}
+input {
+  border: 0;
 }

@@ -6,7 +6,9 @@
   line-height: 20px;
   min-height: 20px;
   mix-blend-mode: normal;
-  white-space: nowrap;
+  /*white-space: nowrap;*/
+  overflow: hidden;
+  overflow-wrap: break-word;
 }
 .button-results {
   align-items: center;
@@ -19,54 +21,59 @@
   overflow: hidden;
   padding: 0 22px;
   width: 110px;
+  cursor: pointer;
 }
 .g-nft {
-  left: 0;
+  margin-left: 5%;
   letter-spacing: 0;
   line-height: 26px;
   mix-blend-mode: normal;
   position: absolute;
+  padding-top: 10px;
   top: 42px;
-  width: 78px;
+}
+.g-nft a {
+  color: var(--black);
+  font-family: var(--font-family-apercu_pro-medium);
+  font-size: var(--font-size-xxxl);
+  font-style: normal;
+  font-weight: 500;
 }
 .image-14 {
   height: 243px;
   mix-blend-mode: normal;
   object-fit: cover;
-  width: 225px;
+  width: 100%;
+  border-radius: 25px;
 }
 .overlap-group-results {
   align-items: flex-start;
   align-self: center;
   background-size: 100% 100%;
   display: flex;
-  height: 1050px;
   margin-top: 18px;
-  min-width: 1694px;
-  padding: 25px 46px;
+  min-width: 1200px;
+  width: 100%;
+  padding-top: 25px;
+  position: relative;
+  flex-flow: row wrap;
 }
 .overlap-group2 {
   height: 93px;
-  margin-left: 37px;
-  position: relative;
-  width: 1770px;
+  width: 100%;
 }
-.photography {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  height: 305px;
-  width: 225px;
+.nft-result {
+  margin-left: 1.83%;
+  margin-right: 1.83%;
+  padding-bottom: 30px;
+  width: 13%;
 }
 .results {
   align-items: flex-start;
   background-color: var(--white);
-  display: flex;
-  flex-direction: column;
-  height: 1280px;
   mix-blend-mode: normal;
   position: relative;
-  width: 1920px;
+  width: 80%;
 }
 .scifi {
   align-self: center;
@@ -90,7 +97,7 @@
 .search-box-results {
   align-items: flex-start;
   background-color: var(--wild-sand);
-  border-radius: 12px;
+  border-radius: 14px;
   display: flex;
   height: 60px;
   mix-blend-mode: normal;
@@ -111,16 +118,14 @@
 .search-module-results {
   align-items: flex-end;
   background-color: var(--white);
-  border-radius: 20px;
   display: flex;
   height: 93px;
-  left: 76px;
+  margin-left: 11.5%;
   mix-blend-mode: normal;
   overflow: hidden;
-  padding: 9px 46px;
   position: absolute;
   top: 0;
-  width: 1694px;
+  width: 80%;
 }
 .viktoria-bolonina {
   color: var(--black);
@@ -132,7 +137,9 @@
   margin-top: 12px;
   min-height: 30px;
   mix-blend-mode: normal;
-  white-space: nowrap;
+  /*white-space: nowrap;*/
+  overflow: hidden;
+  overflow-wrap: break-word;
 }
 .search-all-nfts-results {
   color: black;
@@ -156,4 +163,67 @@
   border-width:0;
   border:none;
   outline:none;
+}
+.skeleton-image {
+  height: 243px;
+  width: 100%;
+  padding-top: 100%;
+  border-radius: 25px;
+  background-color: var(--skeleton);
+}
+.skeleton-title {
+  background-color: var(--skeleton);
+  margin-top: 15px;
+  height: 16px;
+  width: 170px;
+  border-radius: 12px;
+}
+.skeleton-text {
+  background-color: var(--skeleton);
+  height: 14px;
+  width: 120px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.loader {
+  cursor: progress;
+  position: relative;
+  overflow: hidden;
+}
+.loader::after {
+  content: "";
+  -webkit-animation: ssc-loading 1.3s infinite;
+  animation: ssc-loading 1.3s infinite;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  z-index: 1;
+  background: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(rgba(255, 255, 255, 0.3)), to(transparent));
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+@keyframes ssc-loading {
+  from {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+  to {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+}
+.error-response {
+  width: 100%;
+  height: 300px;
+  text-align: center;
+  display: flex;
+  margin: auto;
+  align-items:center;
+  justify-content:center;
+
+  font-family: var(--font-family-apercu_pro-regular);
+  font-size: var(--font-size-xxxl);
 }
