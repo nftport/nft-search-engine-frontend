@@ -68,6 +68,5 @@ const mainPageData = {
   landingImages: landingImages,
   cameraImage: "/img/image-16@2x.png",
   searchIcon: "https://storage.googleapis.com/nft-search/img/search-icon%402x.svg",
-  combinedShape: "/img/combined-shape@2x.svg",
 };
 
