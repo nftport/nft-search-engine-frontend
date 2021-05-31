@@ -1,4 +1,5 @@
 const backendUrl = "http://34.120.251.101/"
+
 // const backendUrl = "http://localhost:80/"
 
 
@@ -35,6 +36,9 @@ function searchFile(file, pagination, setSearchResults) {
       }
       let reason = json.reason ? json.reason : null
       setSearchResults(searchResults, reason)
+    })
+    .catch(response => {
+      setSearchResults([], "SERVER_ERROR")
     });
 }
 
