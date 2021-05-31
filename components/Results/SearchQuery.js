@@ -1,5 +1,5 @@
-// const backendUrl = "http://35.195.155.47:80/"
-const backendUrl = "http://localhost:80/"
+const backendUrl = "http://34.120.251.101/"
+// const backendUrl = "http://localhost:80/"
 
 
 function search(searchQuery, pagination, setSearchResults) {
@@ -10,6 +10,32 @@ function search(searchQuery, pagination, setSearchResults) {
     const requestBody = {query: searchQuery}
     searchImages("search", requestBody, pagination, setSearchResults)
   }
+}
+
+function searchFile(file, pagination, setSearchResults) {
+  const requestBody = {}
+  requestBody.page_size = pagination.pageSize
+  requestBody.page_number = pagination.pageNumber
+  const formData = new FormData();
+  formData.append("file", file);
+  fetch(backendUrl + "search_file", {
+    method: "POST",
+    body: formData,
+    headers: {
+      // "Content-type": "application/json; charset=UTF-8"
+    }
+  })
+    .then(response => response.json())
+    .then(json => {
+      const searchResults = []
+      if (json && json.images) {
+        json.images.forEach(imageObject => {
+          searchResults.push(imageObject)
+        })
+      }
+      let reason = json.reason ? json.reason : null
+      setSearchResults(searchResults, reason)
+    });
 }
 
 function searchImages(endpoint, requestBody, pagination, setSearchResults) {
@@ -32,8 +58,15 @@ function searchImages(endpoint, requestBody, pagination, setSearchResults) {
       }
       let reason = json.reason ? json.reason : null
       setSearchResults(searchResults, reason)
+    })
+    .catch(response => {
+      setSearchResults([], "SERVER_ERROR")
     });
 }
 
-export default search
+const searchQueries = {
+  search: search,
+  searchFile: searchFile
+}
 
+export default searchQueries

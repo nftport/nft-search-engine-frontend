@@ -23,7 +23,12 @@
   width: 110px;
   cursor: pointer;
 }
-.g-nft {
+.button-results:hover {
+  background-color: var(--white);
+  color: var(--black);
+  border: 1px solid var(--black);
+}
+.g-nft-results {
   margin-left: 5%;
   letter-spacing: 0;
   line-height: 26px;
@@ -32,14 +37,14 @@
   padding-top: 10px;
   top: 42px;
 }
-.g-nft a {
+.g-nft-results a {
   color: var(--black);
   font-family: var(--font-family-apercu_pro-medium);
   font-size: var(--font-size-xxxl);
   font-style: normal;
   font-weight: 500;
 }
-.image-14 {
+.result-image {
   height: 243px;
   mix-blend-mode: normal;
   object-fit: cover;
@@ -59,7 +64,7 @@
   flex-flow: row wrap;
 }
 .overlap-group2 {
-  height: 93px;
+  /*height: 93px;*/
   width: 100%;
 }
 .nft-result {
@@ -102,30 +107,36 @@
   height: 60px;
   mix-blend-mode: normal;
   overflow: hidden;
-  padding: 16.7px 22.0px;
-  width: 642px;
+  padding: 10.7px 22.0px;
+  width: 50%;
 }
 .search-components-results {
   align-items: flex-start;
   display: flex;
-  width: 768px;
+  /*width: 768px;*/
+  margin-bottom: 30px;
 }
 .search-icon-results {
   height: 25px;
   mix-blend-mode: normal;
   width: 24px;
+  margin-top: 6px;
 }
 .search-module-results {
-  align-items: flex-end;
+  /*align-items: flex-end;*/
   background-color: var(--white);
-  display: flex;
-  height: 93px;
-  margin-left: 11.5%;
+  /*display: flex;*/
+  /*height: 93px;*/
+  margin-left: 10%;
+  padding-left: 1.5%;
+  padding-right: 1.5%;
   mix-blend-mode: normal;
   overflow: hidden;
-  position: absolute;
-  top: 0;
+  /*position: absolute;*/
+  /*top: 0;*/
+  padding-top: 35px;
   width: 80%;
+  border-radius: 20px;
 }
 .viktoria-bolonina {
   color: var(--black);
@@ -150,19 +161,20 @@
   letter-spacing: 0;
   line-height: 26px;
   margin-left: 9px;
+  margin-top: 6px;
   min-height: 26px;
-  min-width: 800px;
+  /*min-width: 800px;*/
   mix-blend-mode: normal;
   white-space: nowrap;
-  width: 800px;
+  width: 95%;
 
-  border-width:0;
-  border:none;
+  border-width: 0;
+  border: none;
 }
 .search-all-nfts-results:focus {
-  border-width:0;
-  border:none;
-  outline:none;
+  border-width: 0;
+  border: none;
+  outline: none;
 }
 .skeleton-image {
   height: 243px;
@@ -221,8 +233,8 @@
   text-align: center;
   display: flex;
   margin: auto;
-  align-items:center;
-  justify-content:center;
+  align-items: center;
+  justify-content: center;
 
   font-family: var(--font-family-apercu_pro-regular);
   font-size: var(--font-size-xxxl);

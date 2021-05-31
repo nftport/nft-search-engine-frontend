@@ -1,6 +1,7 @@
 import React from "react";
 import Footer from "../Footer";
 import "./Privacy.css";
+import "./PrivacyMobile.css";
 
 class Email extends React.Component {
   render() {
@@ -15,10 +16,10 @@ class Privacy extends React.Component {
     return (
       <>
         <div className="overlap-group2 privacy-page">
-          <div className="g-nft apercupro-medium-black-30px"><a href="/">gNFT</a></div>
+          <div className="g-nft-privacy apercupro-medium-black-30px"><a href="/">gNFT</a></div>
 
         </div>
-        <div className="container-center-horizontal">
+        <div className="container-center-horizontal privacy-container">
           <div className="results screen apercupro-regular-normal-black-20px">
             <div className="page-title-privacy">
               Privacy policy

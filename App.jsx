@@ -1,51 +1,55 @@
 import "./App.css";
 import React from "react";
-import {Switch, BrowserRouter as Router, Route} from "react-router-dom";
+import {Switch, BrowserRouter as Router, Route, useHistory} from "react-router-dom";
 import MainPage from "./components/MainPage";
 import Results from "./components/Results";
 import Privacy from "./components/Privacy";
 
+
+import {ethers} from "ethers"
+import {NftProvider, useNft} from "use-nft"
+
+console.log("ethers")
+console.log(ethers)
+// const fetcher = ["ethers", { ethers, provider: ethers.getDefaultProvider("mainnet", {alchemy: "ZW1tKx3hcZkd51cF8KU6vj5yqU4NLxhM"}) }]
+const fetcher = ["ethers", {
+  ethers,
+  provider: new ethers.providers.JsonRpcProvider("https://eth-mainnet.alchemyapi.io/v2/ZW1tKx3hcZkd51cF8KU6vj5yqU4NLxhM")
+}]
+
+
 function App() {
+  const fileSearchInput = {}
+
+  function fileSearch(fileInput) {
+    fileSearchInput.file = fileInput
+  }
+
   return (
-    <Router>
-      <Switch>
-        <Route path="/:path(|main-page)">
-          <MainPage {...mainPageData} />
-        </Route>
-        <Route path="/results/:query">
-          <Results {...resultsData} />
-        </Route>
-        <Route path="/privacy-policy">
-          <Privacy/>
-        </Route>
-      </Switch>
-    </Router>
+    <NftProvider fetcher={fetcher}>
+      <Router>
+        <Switch>
+          <Route path="/:path(|main-page)">
+            <MainPage {...mainPageData} fileSearch={fileSearch}/>
+          </Route>
+          <Route path="/results">
+            <Results {...resultsData} fileSearchInput={fileSearchInput}/>
+          </Route>
+          <Route path="/privacy-policy">
+            <Privacy/>
+          </Route>
+        </Switch>
+      </Router>
+    </NftProvider>
   );
 }
 
 export default App;
-const footerData = {
-  combinedShape: "/img/combined-shape@2x.svg",
-  text1: "Copyright (c) 2021 gNFT. All rights reserved.",
-  place: "Contact",
-  privacyPolicy: "Privacy Policy",
-};
 
-const skeletonLoaderData = {
-  footerProps: footerData,
-};
-
-const footer2Data = {
-  combinedShape: "/img/combined-shape@2x.svg",
-  text1: "Copyright (c) 2021 gNFT. All rights reserved.",
-  place: "Contact",
-  privacyPolicy: "Privacy Policy",
-};
 
 const resultsData = {
   searchIcon: "/img/search-icon@2x.svg",
   overlapGroup: "/img/results@1x.svg",
-  footerProps: footer2Data,
 };
 
 const landingImages = [
@@ -67,6 +71,5 @@ const landingImages = [
 const mainPageData = {
   landingImages: landingImages,
   cameraImage: "/img/image-16@2x.png",
-  searchIcon: "https://storage.googleapis.com/nft-search/img/search-icon%402x.svg",
 };
 

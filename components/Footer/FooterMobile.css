@@ -1,0 +1,22 @@
+@media (max-width: 768px) {
+  .footer {
+    height: auto;
+  }
+  .flex-row-footer {
+    display: block;
+    min-width: 100%;
+  }
+  .flex-col-footer {
+    margin: 0 auto;
+    display: block;
+    width: max-content;
+  }
+  .flex-col-footer-center {
+    margin: 20px auto;
+    width: 100%;
+  }
+  .flex-col-footer-end {
+    margin: 20px auto;
+    width: 100%;
+  }
+}

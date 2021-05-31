@@ -1,6 +1,15 @@
 
 .privacy-page {
 }
+.g-nft-privacy {
+  padding-left: 80px;
+  padding-top: 80px;
+}
+.g-nft-privacy a {
+  color: var(--black);
+  font-family: var(--font-family-apercu_pro-medium);
+  font-size: var(--font-size-xxxxl);
+}
 
 .page-title-privacy {
   font-family: var(--font-family-apercu_pro-medium);

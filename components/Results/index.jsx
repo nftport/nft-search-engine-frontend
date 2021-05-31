@@ -1,13 +1,17 @@
 import React from "react";
 import Footer from "../Footer";
 import "./Results.css";
+import "./ResultsMobile.css";
 import SearchResults from "./SearchResults";
-import search from "./SearchQuery";
+import searchQueries from "./SearchQuery";
 import SkeletonLoader from "./SkeletonLoader";
+import FileUploadForm from "../FileUploadForm";
 
 
 class Results extends React.Component {
   params = null
+
+  cameraImage = "/img/image-16@2x.png"
 
   state = {
     searchQuery: "",
@@ -23,11 +27,19 @@ class Results extends React.Component {
 
   componentDidMount() {
     let urlSplit = window.location.href.split("results/");
-    if (urlSplit && urlSplit.length) {
-      this.state.searchQuery = urlSplit[urlSplit.length - 1]
-      // this.searching = true
+    if (urlSplit && urlSplit.length && urlSplit.length > 1) {
+      const searchQuery = urlSplit[urlSplit.length - 1]
+      if (searchQuery) {
+        this.state.searchQuery = urlSplit[urlSplit.length - 1]
+        // this.searching = true
+        this.setState({searching: true})
+        searchQueries.search(this.state.searchQuery, this.pagination, this.setSearchResults)
+      }
+    }
+    if (this.props.fileSearchInput && this.props.fileSearchInput.file) {
       this.setState({searching: true})
-      search(this.state.searchQuery, this.pagination, this.setSearchResults)
+      const file = this.props.fileSearchInput.file
+      searchQueries.searchFile(file, this.pagination, this.setSearchResults)
     }
   }
 
@@ -36,7 +48,6 @@ class Results extends React.Component {
   }
 
   setSearchResults = (searchResults, reason) => {
-    // TODO: uncomment
     this.searchResults = searchResults
     this.setState({searching: false})
     this.setState({reason: reason})
@@ -52,7 +63,21 @@ class Results extends React.Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     this.setState({searching: true})
-    search(this.state.searchQuery, this.pagination, this.setSearchResults)
+    searchQueries.search(this.state.searchQuery, this.pagination, this.setSearchResults)
+  }
+
+  toggleFileUploader = () => {
+    this.setState({showFileUpload: !this.state.showFileUpload})
+  }
+
+  handleFileSearchSubmit = query => {
+    this.setState({searching: true})
+    searchQueries.search(query, this.pagination, this.setSearchResults)
+  }
+
+  handleFileUpload = file => {
+    this.setState({searching: true})
+    searchQueries.searchFile(file, this.pagination, this.setSearchResults)
   }
 
 
@@ -60,24 +85,39 @@ class Results extends React.Component {
     return (
       <>
         <div className="overlap-group2">
-          <div className="g-nft apercupro-medium-black-30px"><a href="/">gNFT</a></div>
-          <form onSubmit={this.handleSubmit}>
-            <div className="search-module-results">
-              <div className="search-components-results">
-                <div className="search-box-results">
-                  <img className="search-icon-results"
-                       src="https://storage.googleapis.com/nft-search/img/search-icon%402x.svg"/>
-                  <input
-                    className="search-all-nfts-results"
-                    placeholder="Search by keywords or image URL"
-                    value={this.state.searchQuery} onChange={this.handleFormInputChange}
-                  />
+          <div className="g-nft-results apercupro-medium-black-30px"><a href="/">gNFT</a></div>
+          <div>
+            <div className="search-module-results" style={{background: this.state.showFileUpload ? "var(--light-grey)": ""}}>
+              <form onSubmit={this.handleSubmit}>
+
+                <div className="search-components-results">
+                  <div className="search-box-results">
+                    <img className="search-icon-results"
+                         src="https://storage.googleapis.com/nft-search/img/search-icon%402x.svg"/>
+                    <input
+                      className="search-all-nfts-results"
+                      placeholder="Search by keywords or image URL"
+                      value={this.state.searchQuery} onChange={this.handleFormInputChange}
+                    />
+                    <img onClick={this.toggleFileUploader} className="image-16" src={this.cameraImage}/>
+                  </div>
+                  <input type="submit" value="Search"
+                         className="button-results search-results apercupro-medium-white-20px"/>
                 </div>
-                <input type="submit" value="Search"
-                       className="button-results search-results apercupro-medium-white-20px"/>
+              </form>
+              <div>
+                {this.state.showFileUpload &&
+                <FileUploadForm resultsPage
+                                handleFileUpload={this.handleFileUpload}
+                                handleSubmit={this.handleFileSearchSubmit}/>
+                }
               </div>
             </div>
-          </form>
+
+
+          </div>
+
+
         </div>
         <div className="container-center-horizontal">
           <div className="results screen">
