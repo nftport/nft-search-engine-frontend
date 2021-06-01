@@ -22,9 +22,11 @@
   width: 100%;
   margin: 55px auto 0 auto;
   border-top: 1px solid #F2F4F8;
-}
-.footer.footer {
-  position: relative;
+  background: var(--white);
+
+  position: fixed;
+  bottom: 0;
+
 }
 .line-4 {
   /*height: 2px;*/
@@ -123,5 +125,10 @@
 @media (max-width: 1800px) {
   .place, .privacy-policy {
     text-align: center;
+  }
+}
+@media (max-width: 1400px) {
+  .flex-col-footer {
+    width: 10%;
   }
 }

@@ -84,9 +84,8 @@ class Results extends React.Component {
   render() {
     return (
       <>
-        <div className="overlap-group2">
+        <div className="overlap-group-results-header">
           <div className="g-nft-results apercupro-medium-black-30px"><a href="/">gNFT</a></div>
-          <div>
             <div className="search-module-results" style={{background: this.state.showFileUpload ? "var(--light-grey)": ""}}>
               <form onSubmit={this.handleSubmit}>
 
@@ -115,7 +114,6 @@ class Results extends React.Component {
             </div>
 
 
-          </div>
 
 
         </div>

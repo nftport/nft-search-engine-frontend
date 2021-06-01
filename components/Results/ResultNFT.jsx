@@ -24,7 +24,7 @@ function ResultNFT(props) {
       {nft ?
         <>
           <div className="viktoria-bolonina">{nft.name}</div>
-          <div className="beeple">{nft.description}</div>
+          <div className="beeple">{!nft.description || nft.description.length < 100 ? nft.description : nft.description.slice(0, 100) + "..."}</div>
         </> :
         <>
           <div className="viktoria-bolonina">{props.nft.token_id}</div>

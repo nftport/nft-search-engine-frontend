@@ -1,5 +1,4 @@
 const backendUrl = "http://34.120.251.101/"
-
 // const backendUrl = "http://localhost:80/"
 
 

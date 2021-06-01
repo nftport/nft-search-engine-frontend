@@ -50,7 +50,7 @@ class FileUploadForm extends React.Component {
               <img className="search-icon" src="https://storage.googleapis.com/nft-search/img/search-icon%402x.svg"/>
               <input
                 className="search-all-nfts"
-                placeholder="Search by image URL"
+                placeholder="Enter image URL"
                 value={this.state.value} onChange={this.handleChange}
               />
             </div>

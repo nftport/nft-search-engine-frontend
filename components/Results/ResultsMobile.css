@@ -2,6 +2,7 @@
   .g-nft-results {
     padding-top: 30px;
     position: inherit;
+    display: block;
     /*font-size: var(--font-size-xl)*/
   }
   .g-nft-results a {
@@ -14,6 +15,7 @@
   }
   .search-components-results {
     display: block;
+    text-align: center;
   }
   .search-box-results {
     width: 100%;
@@ -26,6 +28,9 @@
 
   .results {
     width: 100%;
+  }
+  .overlap-group-results-header {
+    display: block;
   }
   .overlap-group-results {
     width: 100%;
@@ -42,5 +47,7 @@
     height: auto;
     max-height: 400px;
   }
-
+  .button-results {
+    display: inline-block;
+  }
 }

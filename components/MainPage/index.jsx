@@ -84,10 +84,17 @@ class MainPage extends React.Component {
                 </div>
               </div>
               <div className="flex-col-header">
-                <a href="mailto:info@thesentinel.ai">
+                <a href="mailto:info@thesentinel.ai" className="desktop">
                   <div className="overlap-group button">
                     <div className="get-api-access">
                       GET API ACCESS
+                    </div>
+                  </div>
+                </a>
+                <a href="mailto:info@thesentinel.ai" className="mobile">
+                  <div className="overlap-group button">
+                    <div className="get-api-access">
+                      API
                     </div>
                   </div>
                 </a>
@@ -110,14 +117,14 @@ class MainPage extends React.Component {
                     <img className="image-" src={this.landingImages[4]}/>
                     <img className="image- image-bottom" src={this.landingImages[5]}/>
                   </div>
-                  <div className="flex-col-3">
+                  <div className="flex-col-5">
                     <img className="image- image-main-center" src={this.landingImages[6]}/>
                   </div>
-                  <div className="flex-col-3">
+                  <div className="flex-col-5">
                     <img className="image-" src={this.landingImages[7]}/>
                     <img className="image- image-bottom" src={this.landingImages[8]}/>
                   </div>
-                  <div className="flex-col-2">
+                  <div className="flex-col-4">
                     <img className="image-" src={this.landingImages[9]}/>
                     <img className="image- image-bottom" src={this.landingImages[10]}/>
                   </div>

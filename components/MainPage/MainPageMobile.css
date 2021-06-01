@@ -15,7 +15,7 @@
     margin-right: 0;
   }
   .flex-col-6-header {
-    margin-top: 100px;
+    margin-top: 20px;
   }
   .g-nft {
     margin: 0;
@@ -24,14 +24,14 @@
     left: 20px;
   }
   .overlap-group {
-    margin-top: 100px;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
+    /*margin-left: auto;*/
+    right: 30px;
+    top: 24px;
+    min-width: 35px;
   }
   .get-api-access {
     margin-top: 100px;
+    min-width: 35px;
   }
   .text-2 {
     width: 100%;
@@ -59,13 +59,15 @@
   }
   .search-components-main {
     display: block;
+    text-align: center;
   }
   .search-box-main {
     background: var(--grey);
   }
   .search {
-    margin: 20px auto 0 20px;
-    width: 90%;
+    margin: 20px auto 0 auto;
+    width: 92%;
+    display: inline-block;
   }
   .search-all-nfts {
     min-width: 200px;
