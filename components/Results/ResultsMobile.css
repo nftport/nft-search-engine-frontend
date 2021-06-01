@@ -50,4 +50,7 @@
   .button-results {
     display: inline-block;
   }
+  input:placeholder-shown {
+    font-size: 16px;
+  }
 }
