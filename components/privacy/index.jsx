@@ -16,7 +16,7 @@ class Privacy extends React.Component {
     return (
       <>
         <div className="overlap-group2 privacy-page">
-          <div className="g-nft-privacy apercupro-medium-black-30px"><a href="/">gNFT</a></div>
+          <div className="g-nft-privacy apercupro-medium-black-30px"><a href="/">NFTPort</a></div>
 
         </div>
         <div className="container-center-horizontal privacy-container">
@@ -30,7 +30,7 @@ class Privacy extends React.Component {
               </div>
               {/*TODO: the website?*/}
               <div className="privacy-block">
-                Sidekik OÜ ("Company") and https://thesentinel.ai ("the Website") (collectively "we") are committed to
+                Sidekik OÜ ("Company") and https://nftport.xyz ("the Website") (collectively "we") are committed to
                 protecting the privacy and security of our visitors to our Website and the registered users of our
                 Services. This Privacy Policy sets forth how the Website and our Services collect and use personal
                 information and data. By using the Website and Services, you acknowledge that you have read and accepted
@@ -197,14 +197,14 @@ class Privacy extends React.Component {
                   <ul>
                     <li>New blogs are available</li>
                     <li>Personal sales emails</li>
-                    <li>Newsletter of recent Sentinel activity</li>
+                    <li>Newsletter of recent NFTPort activity</li>
                     <li>Product updates</li>
                     <li>Resources are available</li>
                   </ul>
                 </div>
                 <div className="privacy-block">
                   To manage your email communication preferences, please visit the communication preferences link at the
-                  bottom of Sentinel emails.
+                  bottom of NFTPort emails.
                 </div>
                 <div className="privacy-block">
                   We will never initiate a request for personal information by email or pop-up window. If you receive a

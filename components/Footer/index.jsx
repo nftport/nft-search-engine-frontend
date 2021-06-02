@@ -13,8 +13,8 @@ function Footer(props) {
                  src="https://storage.googleapis.com/nft-search/img/combined-shape%402x.svg"/>
           </a>
         </div>
-        <div className="flex-col-footer-center valign-text-middle text-1 apercupro-regular-normal-black-16px">
-          Copyright (c) 2021 gNFT. All
+        <div className="desktop flex-col-footer-center valign-text-middle text-1 apercupro-regular-normal-black-16px">
+          Copyright (c) 2021 NFTPort. All
           rights reserved.
         </div>
         <div className="flex-col-footer-end">
@@ -28,6 +28,10 @@ function Footer(props) {
               </a>
             </div>
           </div>
+        </div>
+        <div className="mobile flex-col-footer-center valign-text-middle text-1 apercupro-regular-normal-black-16px">
+          Copyright (c) 2021 NFTPort. All
+          rights reserved.
         </div>
       </div>
     </div>

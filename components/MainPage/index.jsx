@@ -53,7 +53,7 @@ class MainPage extends React.Component {
           <div className="main-page screen">
             <div className="flex-row">
               <div className="flex-col-1-header">
-                <div className="g-nft">gNFT</div>
+                <div className="g-nft">NFTPort</div>
               </div>
               <div className="flex-col-6-header">
                 <div className="text-2">Google for NFTs</div>
@@ -66,11 +66,16 @@ class MainPage extends React.Component {
                           <img className="search-icon"
                                src="https://storage.googleapis.com/nft-search/img/search-icon%402x.svg"/>
                           <input
-                            className="search-all-nfts"
+                            className="desktop search-all-nfts"
                             placeholder="Search by keywords"
                             value={this.state.value} onChange={this.handleQueryChange}
                           />
-                          <img onClick={this.toggleFileUploader} className="image-16" src={this.cameraImage}/>
+                          <input
+                            className="mobile search-all-nfts"
+                            placeholder="Search by keywords or image URL"
+                            value={this.state.value} onChange={this.handleQueryChange}
+                          />
+                          <img onClick={this.toggleFileUploader} className="camera-image" src={this.cameraImage}/>
                         </div>
                         <input type="submit" value="Search" className="button search apercupro-medium-white-20px"/>
                       </div>

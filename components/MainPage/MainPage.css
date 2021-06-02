@@ -131,7 +131,7 @@
 .flex-row-2 {
   align-items: flex-start;
   display: flex;
-  height: 839px;
+  /*height: 839px;*/
   min-width: 1266px;
 }
 .g-nft {
@@ -185,7 +185,7 @@
 .image-main-center {
   margin-top: 121.0px;
 }
-.image-16 {
+.camera-image {
   height: 39px;
   margin-left: 7px;
   mix-blend-mode: normal;

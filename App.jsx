@@ -53,23 +53,23 @@ const resultsData = {
 };
 
 const landingImages = [
-  "/img/image-2@2x.png",
-  "/img/image-3@2x.png",
-  "/img/image-4@2x.png",
-  "/img/image-5@2x.png",
-  "/img/image-7@2x.png",
-  "/img/image-11@2x.png",
-  "/img/image-6@2x.png",
-  "/img/image-8@2x.png",
-  "/img/image-12@2x.png",
-  "/img/image-9@2x.png",
-  "/img/image-13@2x.png",
-  "/img/image-10@2x.png",
-  "/img/screenshot-2021-05-17-at-11-03-1@2x.png"
+  "/img/image-2@2x.jpg",
+  "/img/image-3@2x.jpg",
+  "/img/image-4@2x.jpg",
+  "/img/image-5@2x.jpg",
+  "/img/image-7@2x.jpg",
+  "/img/image-11@2x.jpg",
+  "/img/image-6@2x.jpg",
+  "/img/image-8@2x.jpg",
+  "/img/image-12@2x.jpg",
+  "/img/image-9@2x.jpg",
+  "/img/image-13@2x.jpg",
+  "/img/image-10@2x.jpg",
+  "/img/screenshot-2021-05-17-at-11-03-1@2x.jpg"
 ]
 
 const mainPageData = {
   landingImages: landingImages,
-  cameraImage: "/img/image-16@2x.png",
+  cameraImage: "/img/camera.svg",
 };
 

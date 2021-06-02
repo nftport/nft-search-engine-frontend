@@ -24,8 +24,8 @@
   border-top: 1px solid #F2F4F8;
   background: var(--white);
 
-  position: fixed;
-  bottom: 0;
+  /*position: fixed;*/
+  /*bottom: 0;*/
 
 }
 .line-4 {

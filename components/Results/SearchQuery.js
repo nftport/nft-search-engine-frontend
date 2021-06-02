@@ -1,4 +1,4 @@
-const backendUrl = "http://34.120.251.101/"
+const backendUrl = "https://api.nftport.xyz/"
 // const backendUrl = "http://localhost:80/"
 
 

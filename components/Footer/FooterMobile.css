@@ -1,6 +1,7 @@
 @media (max-width: 1200px) {
   .footer {
     height: auto;
+    position: inherit;
   }
   .flex-row-footer {
     display: block;
