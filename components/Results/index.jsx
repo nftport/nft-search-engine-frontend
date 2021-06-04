@@ -122,7 +122,7 @@ class Results extends React.Component {
 
         </div>
         <div className="container-center-horizontal">
-          <div style={{width: "10%"}} className="desktop"/>
+          <div style={{width: "10%"}} className="desktop-big"/>
           <div className="results screen">
 
             {this.state.searching
@@ -130,7 +130,7 @@ class Results extends React.Component {
               : <SearchResults searchResults={this.searchResults} reason={this.state.reason}/>
             }
           </div>
-          <div style={{width: "10%"}} className="desktop"/>
+          <div style={{width: "10%"}} className="desktop-big"/>
 
         </div>
         <Footer/>

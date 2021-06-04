@@ -1,6 +1,7 @@
 const backendUrl = "https://api.nftport.xyz/"
 // const backendUrl = "http://localhost:80/"
 
+const AuthToken = "a67edb4e-d737-4c17-96e1-5902f548d9f8"
 
 function search(searchQuery, pagination, setSearchResults) {
   if (searchQuery.startsWith("http://") || searchQuery.startsWith("https://")) {
@@ -22,6 +23,7 @@ function searchFile(file, pagination, setSearchResults) {
     method: "POST",
     body: formData,
     headers: {
+      "Authorization": AuthToken
       // "Content-type": "application/json; charset=UTF-8"
     }
   })
@@ -48,6 +50,7 @@ function searchImages(endpoint, requestBody, pagination, setSearchResults) {
     method: "POST",
     body: JSON.stringify(requestBody),
     headers: {
+      "Authorization": AuthToken,
       "Content-type": "application/json; charset=UTF-8"
     }
   })

@@ -49,6 +49,11 @@ input {
 .mobile {
   display: none;
 }
+@media (max-width: 1800px) {
+  .desktop-big {
+    display: none;
+  }
+}
 @media (max-width: 768px) {
   .desktop {
     display: none;
