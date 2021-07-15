@@ -1,124 +1,143 @@
 import React from "react";
 import Footer from "../Footer";
 import "./Results.css";
-import {
-  useParams
-} from "react-router-dom";
+import "./ResultsMobile.css";
+import SearchResults from "./SearchResults";
+import searchQueries from "./SearchQuery";
+import SkeletonLoader from "./SkeletonLoader";
+import FileUploadForm from "../FileUploadForm";
 
 
-function GetDiv(searchResults) {
-  console.log("GetDiv")
-  console.log(searchResults)
-  return <>
-    {searchResults.map((result, index) => (
-      <div className="photography" key={index}>
-        <img className="image-14" src={result.image_url}/>
-        <div className="viktoria-bolonina">title</div>
-        <div className="beeple">aa</div>
-      </div>
-    ))}
-  </>;
-}
+class Results extends React.Component {
+  params = null
 
-function Results(props) {
-  let params = useParams()
+  cameraImage = "/img/camera.svg"
 
-  const state = {}
-  let searchResults = null
+  state = {
+    searchQuery: "",
+    searching: false,
+    reason: null
+  }
+  searchResults = null
 
-  const pagination = {
+  pagination = {
     pageNumber: 1,
-    pageSize: 20
+    pageSize: 50
   }
 
-  if (params && params.query) {
-    searchImages(params.query, pagination)
-    // state.value = params.query
-  }
-
-  function handleChange(event) {
-    state.value = event.target.value
-    console.log(state)
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    // history.push("/results/" + state.value);
-    console.log("handle submit")
-  }
-
-  function searchImages(query, pagination) {
-    fetch("http://0.0.0.0:80/search", {
-      method: "POST",
-      body: JSON.stringify({
-        query: query,
-        page_size: pagination.pageSize,
-        page_number: pagination.pageNumber
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
+  componentDidMount() {
+    let urlSplit = window.location.href.split("results/");
+    if (urlSplit && urlSplit.length && urlSplit.length > 1) {
+      const searchQuery = urlSplit[urlSplit.length - 1]
+      if (searchQuery) {
+        this.state.searchQuery = decodeURI(searchQuery)
+        this.setState({searching: true})
+        searchQueries.search(this.state.searchQuery, this.pagination, this.setSearchResults)
       }
-    })
-      .then(response => response.json())
-      .then(json => {
-        console.log("response")
-        console.log(json)
-        if (json && json.images) {
-          searchResults = []
-          json.images.forEach(imageObject => {
-            searchResults.push(imageObject)
-          })
-
-          console.log("searchResults")
-          console.log(searchResults)
-        }
-      });
+    }
+    if (this.props.fileSearchInput && this.props.fileSearchInput.file) {
+      this.setState({searching: true})
+      const file = this.props.fileSearchInput.file
+      searchQueries.searchFile(file, this.pagination, this.setSearchResults)
+    }
   }
 
-  const {gnft, searchIcon, scifi, search, overlapGroup, image14, viktoriaBolonina, beeple, footerProps} = props;
+  componentDidUpdate(prevProps, prevState, snapshot) {
 
-  return (
-    <div className="container-center-horizontal">
-      <div className="results screen">
-        <div className="overlap-group2">
-          <div className="g-nft apercupro-medium-black-30px">{gnft}</div>
-          <div className="search-module-results">
-            <div className="search-components-results">
-              <div className="search-box-results">
-                <img className="search-icon-results" src={searchIcon}/>
-                <input
-                  className="search-all-nfts-results"
-                  placeholder="Search all NFTs"
-                  value={state.value} onChange={handleChange}
-                />
+  }
+
+  setSearchResults = (searchResults, reason) => {
+    this.searchResults = searchResults
+    this.setState({searching: false})
+    this.setState({reason: reason})
+    this.setState(this.searchResults)
+  }
+
+
+  handleFormInputChange = (event) => {
+    this.state.searchQuery = event.target.value
+    this.setState(this.state)
+  }
+
+  handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!this.state.searching) {
+      this.setState({searching: true})
+      searchQueries.search(this.state.searchQuery, this.pagination, this.setSearchResults)
+    }
+  }
+
+  toggleFileUploader = () => {
+    this.setState({showFileUpload: !this.state.showFileUpload})
+  }
+
+  handleFileSearchSubmit = query => {
+    if (!this.state.searching) {
+      this.setState({searching: true})
+      searchQueries.search(query, this.pagination, this.setSearchResults)
+    }
+  }
+
+  handleFileUpload = file => {
+    if (!this.state.searching) {
+      this.setState({searching: true})
+      searchQueries.searchFile(file, this.pagination, this.setSearchResults)
+    }
+  }
+
+
+  render() {
+    return (
+      <>
+        <div className="overlap-group-results-header">
+          <div className="g-nft-results apercupro-medium-black-30px"><a href="/">NFTPort</a></div>
+          <div className="search-module-results"
+               style={{background: this.state.showFileUpload ? "var(--light-grey)" : ""}}>
+            <form onSubmit={this.handleSubmit}>
+
+              <div className="search-components-results">
+                <div className="search-box-results">
+                  <img className="search-icon-results"
+                       src="https://storage.googleapis.com/nft-search/img/search-icon%402x.svg"/>
+                  <input
+                    className="search-all-nfts-results"
+                    placeholder="Search by keywords or image URL"
+                    value={this.state.searchQuery} onChange={this.handleFormInputChange}
+                  />
+                  <img onClick={this.toggleFileUploader} className="camera-image" src={this.cameraImage}/>
+                </div>
+                <input type="submit" value="Search"
+                       className="button-results search-results apercupro-medium-white-20px"/>
               </div>
-              <div className="button-results">
-                <div className="search-results apercupro-medium-white-20px">{search}</div>
-              </div>
+            </form>
+            <div>
+              {this.state.showFileUpload &&
+              <FileUploadForm resultsPage
+                              handleFileUpload={this.handleFileUpload}
+                              handleSubmit={this.handleFileSearchSubmit}/>
+              }
             </div>
           </div>
-        </div>
-        <div id="results" className="overlap-group-results">
-          {searchResults != null && <h2> jo </h2>}
 
-          {/*<div className="photography">*/}
-          {/*  <img className="image-14" src={image14}/>*/}
-          {/*  <div className="viktoria-bolonina">{viktoriaBolonina}</div>*/}
-          {/*  <div className="beeple">{beeple}</div>*/}
-          {/*</div>*/}
-          {/*{getDiv(searchResults)}*/}
+
         </div>
-        <Footer
-          line4={footerProps.line4}
-          combinedShape={footerProps.combinedShape}
-          text1={footerProps.text1}
-          place={footerProps.place}
-          privacyPolicy={footerProps.privacyPolicy}
-          className="footer"
-        />
-      </div>
-    </div>
-  );
+        <div className="container-center-horizontal">
+          <div style={{width: "10%"}} className="desktop-big"/>
+          <div className="results screen">
+
+            {this.state.searching
+              ? <SkeletonLoader/>
+              : <SearchResults searchResults={this.searchResults} reason={this.state.reason}/>
+            }
+          </div>
+          <div style={{width: "10%"}} className="desktop-big"/>
+
+        </div>
+        <Footer/>
+      </>
+
+    );
+  }
 }
 
 export default Results;

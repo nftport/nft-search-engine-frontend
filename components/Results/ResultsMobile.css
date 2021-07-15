@@ -1,0 +1,56 @@
+@media (max-width: 768px) {
+  .g-nft-results {
+    padding-top: 30px;
+    position: inherit;
+    display: block;
+    /*font-size: var(--font-size-xl)*/
+  }
+  .g-nft-results a {
+    font-size: var(--font-size-xxxxl)
+  }
+  .search-module-results {
+    padding: 0;
+    margin: 30px 0 0 0;
+    width: 100%;
+  }
+  .search-components-results {
+    display: block;
+    text-align: center;
+  }
+  .search-box-results {
+    width: 100%;
+  }
+  .button-results {
+    padding: 0;
+    margin: 20px 0 0 0;
+    width: 100%;
+  }
+
+  .results {
+    width: 100%;
+  }
+  .overlap-group-results-header {
+    display: block;
+  }
+  .overlap-group-results {
+    width: 100%;
+    min-width: 100%;
+    display: block;
+  }
+  .nft-result {
+    width: 100%;
+    padding: 0 0 55px 0;
+    margin: 0;
+  }
+  .result-image {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+  }
+  .button-results {
+    display: inline-block;
+  }
+  input:placeholder-shown {
+    font-size: 16px;
+  }
+}

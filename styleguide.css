@@ -1,7 +1,10 @@
 :root {
   --black: #000000;
   --white: #ffffff;
-  --wild-sand: #f2f4f7;
+  --wild-sand: #d9dbe0;
+  --skeleton: #EAF1F4;
+  --light-grey: #f2f4f8;
+  --grey: #e7e8ec;
 
   --font-size-l: 18px;
   --font-size-m: 16px;
@@ -49,3 +52,11 @@
   font-style: normal;
   font-weight: 500;
 }
+.apercupro-regular-normal-black-20px {
+  color: var(--black);
+  font-family: var(--font-family-apercu_pro-regular);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 400;
+}
+

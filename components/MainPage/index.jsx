@@ -1,116 +1,151 @@
 import React from "react";
-import {Link, useHistory} from "react-router-dom";
 import "./MainPage.css";
+import "./MainPageMobile.css";
 import Footer from "../Footer";
-import {useState} from 'react';
+import {withRouter} from 'react-router-dom';
+import FileUploadForm from "../FileUploadForm/index";
 
 
-function MainPage(props) {
+class MainPage extends React.Component {
 
-  let history = useHistory();
+  state = {
+    showFileUpload: false,
+    files: []
+  }
+  landingImages = this.props.landingImages
+  searchIcon = this.props.searchIcon
+  cameraImage = this.props.cameraImage
+  showFileUpload = "24px"
 
-  const state = {}
-
-  function handleChange(event) {
-    state.value = event.target.value
+  componentDidMount() {
   }
 
-  function handleSubmit(event) {
+
+  toggleFileUploader = () => {
+    this.setState({showFileUpload: !this.state.showFileUpload})
+  }
+
+  handleQuerySubmit = event => {
     event.preventDefault();
-    history.push("/results/" + state.value);
+    if (this.state.value) {
+      this.props.history.push("/results/" + this.state.value);
+    }
   }
 
-  const {
-    image2,
-    image3,
-    searchIcon,
-    image16,
-    image4,
-    image5,
-    image7,
-    image11,
-    image6,
-    image8,
-    image12,
-    image9,
-    image13,
-    image10,
-    line4,
-    combinedShape,
-  } = props;
+  handleQueryChange = event => {
+    this.state.value = event.target.value
+  }
+
+  handleSubmit = query => {
+    this.props.history.push("/results/" + query);
+  }
+
+  handleFileUpload = file => {
+    this.props.fileSearch(file)
+    this.props.history.push("/results")
+  }
 
 
-  return (
-    <div className="container-center-horizontal">
-      <div className="main-page screen">
-        <div className="flex-row">
-          <div className="flex-col-1">
-            <div className="g-nft-i62631055">gNFT</div>
-            <img className="image-2" src={image2}/>
-            <img className="image-3" src={image3}/>
-          </div>
-          <div className="flex-col-6">
-            <div className="flex-col-7">
-              <h1 className="text-2">Google for NFTs</h1>
-              <div className="google-for-nf-ts-i62">Visual & Reverse Image Search for 20M+ NFTs</div>
+  render() {
+    return (
+      <>
+        <div className="container-center-horizontal">
+          <div className="main-page screen">
+            <div className="flex-row">
+              <div className="flex-col-1-header">
+                <div className="g-nft">NFTPort</div>
+              </div>
+              <div className="flex-col-6-header">
+                <div className="text-2">Google for NFTs</div>
+                <div className="main-subtitle">Visual & Reverse Image Search for 1M+ NFTs</div>
+                <div className="search-module-wrapper">
+                  <form onSubmit={this.handleQuerySubmit}>
+                    <div className="search-module">
+                      <div className="search-components search-components-main">
+                        <div className="search-box search-box-main">
+                          <img className="search-icon"
+                               src="https://storage.googleapis.com/nft-search/img/search-icon%402x.svg"/>
+                          <input
+                            className="desktop search-all-nfts"
+                            placeholder="Search by keywords"
+                            value={this.state.value} onChange={this.handleQueryChange}
+                          />
+                          <input
+                            className="mobile search-all-nfts"
+                            placeholder="Search by keywords or image URL"
+                            value={this.state.value} onChange={this.handleQueryChange}
+                          />
+                          <img onClick={this.toggleFileUploader} className="camera-image" src={this.cameraImage}/>
+                        </div>
+                        <input type="submit" value="Search" className="button search apercupro-medium-white-20px"/>
+                      </div>
 
-              <form onSubmit={handleSubmit}>
-                <div className="search-module">
-                  <div className="search-components">
-
-                    <div className="search-box">
-                      <img className="search-icon" src={searchIcon}/>
-                      <input
-                        className="search-all-nfts"
-                        placeholder="Search all NFTs"
-                        value={state.value} onChange={handleChange}
-                      />
-                      <img className="image-16" src={image16}/>
                     </div>
-                    <input type="submit" value="Search" className="button search apercupro-medium-white-20px"/>
+                  </form>
+                  {this.state.showFileUpload &&
+                  <FileUploadForm handleFileUpload={this.handleFileUpload}
+                                  handleSubmit={this.handleSubmit}/>
+                  }
+                </div>
+              </div>
+              <div className="flex-col-header">
+                <a href="mailto:info@thesentinel.ai" className="desktop">
+                  <div className="overlap-group button">
+                    <div className="get-api-access">
+                      GET API ACCESS
+                    </div>
+                  </div>
+                </a>
+                <a href="mailto:info@thesentinel.ai" className="mobile">
+                  <div className="overlap-group button">
+                    <div className="get-api-access">
+                      API
+                    </div>
+                  </div>
+                </a>
+
+              </div>
+            </div>
+
+            <div className="flex-row">
+
+                <div className="flex-row-2">
+                  <div className="flex-col-1">
+                    <img className="image-" src={this.landingImages[0]}/>
+                    <img className="image- image-bottom" src={this.landingImages[1]}/>
+                  </div>
+                  <div className="flex-col-4">
+                    <img className="image-" src={this.landingImages[2]}/>
+                    <img className="image- image-bottom" src={this.landingImages[3]}/>
+                  </div>
+                  <div className="flex-col-5">
+                    <img className="image-" src={this.landingImages[4]}/>
+                    <img className="image- image-bottom" src={this.landingImages[5]}/>
+                  </div>
+                  <div className="flex-col-5">
+                    <img className="image- image-main-center" src={this.landingImages[6]}/>
+                  </div>
+                  <div className="flex-col-5">
+                    <img className="image-" src={this.landingImages[7]}/>
+                    <img className="image- image-bottom" src={this.landingImages[8]}/>
+                  </div>
+                  <div className="flex-col-4">
+                    <img className="image-" src={this.landingImages[9]}/>
+                    <img className="image- image-bottom" src={this.landingImages[10]}/>
+                  </div>
+                  <div className="flex-col">
+                    <img className="image-" src={this.landingImages[11]}/>
+                    <img className="image- image-bottom" src={this.landingImages[12]}/>
                   </div>
                 </div>
-              </form>
 
             </div>
-            <div className="flex-row-2">
-              <div className="flex-col-4">
-                <img className="image-4" src={image4}/>
-                <img className="image-5" src={image5}/>
-              </div>
-              <div className="flex-col-5">
-                <img className="image-" src={image7}/>
-                <img className="image-11" src={image11}/>
-              </div>
-              <img className="image-6" src={image6}/>
-              <div className="flex-col-3">
-                <img className="image-" src={image8}/>
-                <img className="image-12" src={image12}/>
-              </div>
-              <div className="flex-col-2">
-                <img className="image-" src={image9}/>
-                <img className="image-13" src={image13}/>
-              </div>
-            </div>
-          </div>
-          <div className="flex-col">
-            <div className="overlap-group button">
-              <div className="get-api-access">GET API ACCESS</div>
-            </div>
-            <img className="image-10" src={image10}/>
           </div>
         </div>
-        <Footer
-          line4={line4}
-          combinedShape={combinedShape}
-          text1="Copyright (c) 2021 gNFT. All rights reserved."
-          place="Contact"
-          privacyPolicy="Privacy Policy"
-          className="footer"
-        />
-      </div>
-    </div>
-  );
+        <Footer/>
+      </>
+    );
+  }
 }
 
-export default MainPage;
+export default withRouter(MainPage);

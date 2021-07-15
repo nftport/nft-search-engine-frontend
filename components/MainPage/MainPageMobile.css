@@ -1,0 +1,87 @@
+@media (max-width: 768px) {
+  .main-page {
+    margin-top: 100px;
+    padding: 0;
+    display: block;
+    min-height: 65vh;
+  }
+  .flex-row, .flex-col-6-header {
+    display: block;
+  }
+  .flex-col-6-header, .flex-col-6 {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .flex-col-6-header {
+    margin-top: 20px;
+  }
+  .g-nft {
+    margin: 0;
+    padding: 0;
+    top: 37px;
+    left: 20px;
+    font-size: 40px;
+  }
+  .overlap-group {
+    /*margin-left: auto;*/
+    right: 30px;
+    top: 24px;
+    min-width: 35px;
+  }
+  .get-api-access {
+    margin-top: 100px;
+    min-width: 35px;
+  }
+  .text-2 {
+    width: 100%;
+    min-width: 100%;
+    font-size: 40px;
+  }
+  .main-subtitle {
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 100vw;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: var(--font-size-xl)
+  }
+  .search-module-wrapper, .search-module {
+    width: 100%;
+    max-width: 100%;
+    background: transparent;
+    min-height: 200px;
+  }
+  .search-module {
+    margin: 0;
+    padding: 20px 0;
+    height: auto;
+    align-content: center;
+  }
+  .search-components-main {
+    display: block;
+    text-align: center;
+  }
+  .search-box-main {
+    background: var(--grey);
+    width: 92%;
+    margin: 0 auto;
+  }
+  .search {
+    margin: 20px auto 0 auto;
+    width: 92%;
+    display: inline-block;
+  }
+  .search-all-nfts {
+    min-width: 200px;
+    background: var(--grey);
+  }
+  .camera-image {
+    display: none;
+  }
+  .flex-row-2 {
+    display: none;
+  }
+}
