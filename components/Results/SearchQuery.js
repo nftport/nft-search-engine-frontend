@@ -6,10 +6,10 @@ const AuthToken = "a67edb4e-d737-4c17-96e1-5902f548d9f8"
 function search(searchQuery, pagination, setSearchResults) {
   if (searchQuery.startsWith("http://") || searchQuery.startsWith("https://")) {
     const requestBody = {url: searchQuery}
-    searchImages("search_url", requestBody, pagination, setSearchResults)
+    searchImages("visual_search_by_url", requestBody, pagination, setSearchResults)
   } else {
     const requestBody = {query: searchQuery}
-    searchImages("search", requestBody, pagination, setSearchResults)
+    searchImages("visual_search", requestBody, pagination, setSearchResults)
   }
 }
 
@@ -19,7 +19,7 @@ function searchFile(file, pagination, setSearchResults) {
   requestBody.page_number = pagination.pageNumber
   const formData = new FormData();
   formData.append("file", file);
-  fetch(backendUrl + "search_file", {
+  fetch(backendUrl + "visual_search_by_file", {
     method: "POST",
     body: formData,
     headers: {

@@ -57,7 +57,7 @@ class MainPage extends React.Component {
               </div>
               <div className="flex-col-6-header">
                 <div className="text-2">Google for NFTs</div>
-                <div className="main-subtitle">Visual & Reverse Image Search for 2M NFTs</div>
+                <div className="main-subtitle">Visual & Reverse Image Search for 1M+ NFTs</div>
                 <div className="search-module-wrapper">
                   <form onSubmit={this.handleQuerySubmit}>
                     <div className="search-module">
