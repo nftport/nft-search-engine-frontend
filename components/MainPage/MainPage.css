@@ -217,15 +217,15 @@
   /*width: 1920px;*/
 }
 .overlap-group {
-  align-items: flex-end;
+  /*align-items: flex-end;*/
   align-self: flex-start;
   background-color: var(--black);
   border-radius: 10px;
   display: flex;
   height: 57px;
-  justify-content: flex-end;
+  /*justify-content: flex-end;*/
   min-width: 234px;
-  padding: 17px 12px;
+  /*padding: 17px 12px;*/
   color: var(--white);
 }
 .overlap-group:hover {

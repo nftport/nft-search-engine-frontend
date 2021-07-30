@@ -90,7 +90,7 @@ class Results extends React.Component {
     return (
       <>
         <div className="overlap-group-results-header">
-          <div className="g-nft-results apercupro-medium-black-30px"><a href="/">NFTPort</a></div>
+          <div className="g-nft-results apercupro-medium-black-30px"><a href="/">Fingible</a></div>
           <div className="search-module-results"
                style={{background: this.state.showFileUpload ? "var(--light-grey)" : ""}}>
             <form onSubmit={this.handleSubmit}>
