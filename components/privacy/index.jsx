@@ -16,7 +16,7 @@ class Privacy extends React.Component {
     return (
       <>
         <div className="overlap-group2 privacy-page">
-          <div className="g-nft-privacy apercupro-medium-black-30px"><a href="/">NFTPort</a></div>
+          <div className="g-nft-privacy apercupro-medium-black-30px"><a href="/">Fingible</a></div>
 
         </div>
         <div className="container-center-horizontal privacy-container">

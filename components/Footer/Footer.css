@@ -46,6 +46,10 @@
   position: relative;
   width: 309px;
 }
+.icons-footer {
+  padding-left: 10px;
+  padding-right: 10px;
+}
 .place {
   height: 100%;
   letter-spacing: 0;
