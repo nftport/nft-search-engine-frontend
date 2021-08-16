@@ -165,13 +165,13 @@
   font-family: var(--font-family-apercu_pro-regular);
   font-size: var(--font-size-xxxl);
   letter-spacing: 0;
-  line-height: 26px;
+  line-height: 36px;
   margin-right: 14.0px;
   margin-top: 17px;
   min-height: 46px;
   min-width: 606px;
   mix-blend-mode: normal;
-  width: 606px;
+  text-align: center;
 }
 .image- {
   height: 312px;
