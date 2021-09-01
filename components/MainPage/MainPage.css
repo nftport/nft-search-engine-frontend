@@ -155,10 +155,10 @@
   letter-spacing: 0;
   line-height: 26px;
   min-height: 22px;
-  min-width: 197px;
+  min-width: 250px;
   mix-blend-mode: normal;
   white-space: nowrap;
-  width: 197px;
+  width: 250px;
 }
 .main-subtitle {
   color: var(--black);

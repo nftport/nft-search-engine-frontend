@@ -91,7 +91,7 @@ class MainPage extends React.Component {
               <div className="flex-col-header">
                 <a href="https://www.nftport.xyz/" target="_blank" className="desktop">
                   <div className="overlap-group button get-api-access">
-                      Built by NFTPort
+                      Built with NFTPort
                   </div>
                 </a>
                 <a href="https://www.nftport.xyz/" target="_blank" className="mobile">

@@ -5,7 +5,7 @@ function getExternalUrl(propsNft) {
   if (propsNft && propsNft.external_url) {
     return propsNft.external_url
   }
-  return "https://opensea.io/assets/" + propsNft.contract_id + "/" + propsNft.token_id
+  return "https://opensea.io/assets/" + propsNft.contract_address + "/" + propsNft.token_id
 }
 
 function ResultNFT(props) {
@@ -13,7 +13,7 @@ function ResultNFT(props) {
   if (props.nft.raw_metadata && Object.keys(props.nft.raw_metadata).length) {
     nft = props.nft.raw_metadata
   } else {
-    const nftLoader = useNft(props.nft.contract_id, props.nft.token_id)
+    const nftLoader = useNft(props.nft.contract_address, props.nft.token_id)
     if (!nftLoader.loading) {
       nft = nftLoader.nft
     }
@@ -28,7 +28,7 @@ function ResultNFT(props) {
         </> :
         <>
           <div className="viktoria-bolonina">{props.nft.token_id}</div>
-          <div className="beeple">{props.nft.contract_id}</div>
+          <div className="beeple">{props.nft.contract_address}</div>
         </>
       }
 
