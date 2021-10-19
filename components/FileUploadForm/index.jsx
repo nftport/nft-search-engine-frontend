@@ -13,10 +13,6 @@ class FileUploadForm extends React.Component {
     }
   }
 
-  handleChange = event => {
-    this.state.value = event.target.value
-  }
-
   handleFileUpload = event => {
     if (event?.target?.files?.length) {
       this.props.handleFileUpload(event.target.files[0])
@@ -49,12 +45,11 @@ class FileUploadForm extends React.Component {
             <div className={this.props.resultsPage ? "search-box search-box-url-results": "search-box search-box-url-main"}>
               <img className="search-icon" src="https://storage.googleapis.com/nft-search/img/search-icon%402x.svg"/>
               <input
-                className="search-all-nfts"
+                className={this.props.resultsPage ? "search-all-nfts-results" : "search-all-nfts"}
                 placeholder="Enter image URL"
-                value={this.state.value} onChange={this.handleChange}
+                value={this.state.value} onChange={this.props.handleQueryChange}
               />
             </div>
-            <input type="submit" value="Search" className="button search apercupro-medium-white-20px"/>
           </div>
         </form>
       </div>

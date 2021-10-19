@@ -6,6 +6,7 @@ import SearchResults from "./SearchResults";
 import searchQueries from "./SearchQuery";
 import SkeletonLoader from "./SkeletonLoader";
 import FileUploadForm from "../FileUploadForm";
+import SearchModule from "../search/SearchModule";
 
 
 class Results extends React.Component {
@@ -25,25 +26,32 @@ class Results extends React.Component {
     pageSize: 50
   }
 
+
   componentDidMount() {
-    let urlSplit = window.location.href.split("results/");
-    if (urlSplit && urlSplit.length && urlSplit.length > 1) {
-      const searchQuery = urlSplit[urlSplit.length - 1]
-      if (searchQuery) {
-        this.state.searchQuery = decodeURI(searchQuery)
-        this.setState({searching: true})
-        searchQueries.search(this.state.searchQuery, this.pagination, this.setSearchResults)
-      }
-    }
-    if (this.props.fileSearchInput && this.props.fileSearchInput.file) {
+    const queryParams = new URLSearchParams(window.location.search);
+    const query = queryParams.get("query");
+    const type = queryParams.get("type");
+
+    const address = queryParams.get("address");
+    const token = queryParams.get("token");
+    const chain = queryParams.get("chain");
+    const filterAddress = queryParams.get("filter");
+
+    if (query && type) {
+      this.state.searchQuery = decodeURI(query)
+      this.state.searchType = decodeURI(type)
+      this.setState({searching: true})
+      searchQueries.search(this.state.searchQuery, this.state.searchType, this.pagination, this.setSearchResults)
+    } else if (type === "counterfeit" && address && token && chain) {
+      searchQueries.searchCounterfeit(address, token, chain, filterAddress, this.pagination, this.setSearchResults)
+    } else if (this.props.fileSearchInput && this.props.fileSearchInput.file && type) {
       this.setState({searching: true})
       const file = this.props.fileSearchInput.file
-      searchQueries.searchFile(file, this.pagination, this.setSearchResults)
+      searchQueries.searchFile(file, type, this.pagination, this.setSearchResults)
     }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-
   }
 
   setSearchResults = (searchResults, reason) => {
@@ -78,10 +86,21 @@ class Results extends React.Component {
     }
   }
 
-  handleFileUpload = file => {
+  handleQuerySubmit = (searchType, value) => {
     if (!this.state.searching) {
       this.setState({searching: true})
-      searchQueries.searchFile(file, this.pagination, this.setSearchResults)
+      if (searchType === "counterfeit" && typeof value === "object") {
+        searchQueries.searchCounterfeit(value.contractAddress, value.tokenId, "ethereum", value.filterAddress, this.pagination, this.setSearchResults)
+      } else {
+        searchQueries.search(value, searchType, this.pagination, this.setSearchResults)
+      }
+    }
+  }
+
+  handleFileUpload = (searchType, file) => {
+    if (!this.state.searching) {
+      this.setState({searching: true})
+      searchQueries.searchFile(file, searchType, this.pagination, this.setSearchResults)
     }
   }
 
@@ -91,35 +110,12 @@ class Results extends React.Component {
       <>
         <div className="overlap-group-results-header">
           <div className="g-nft-results apercupro-medium-black-30px"><a href="/">Fingible</a></div>
-          <div className="search-module-results"
-               style={{background: this.state.showFileUpload ? "var(--light-grey)" : ""}}>
-            <form onSubmit={this.handleSubmit}>
-
-              <div className="search-components-results">
-                <div className="search-box-results">
-                  <img className="search-icon-results"
-                       src="https://storage.googleapis.com/nft-search/img/search-icon%402x.svg"/>
-                  <input
-                    className="search-all-nfts-results"
-                    placeholder="Search by keywords or image URL"
-                    value={this.state.searchQuery} onChange={this.handleFormInputChange}
-                  />
-                  <img onClick={this.toggleFileUploader} className="camera-image" src={this.cameraImage}/>
-                </div>
-                <input type="submit" value="Search"
-                       className="button-results search-results apercupro-medium-white-20px"/>
-              </div>
-            </form>
-            <div>
-              {this.state.showFileUpload &&
-              <FileUploadForm resultsPage
-                              handleFileUpload={this.handleFileUpload}
-                              handleSubmit={this.handleFileSearchSubmit}/>
-              }
-            </div>
-          </div>
-
-
+          <SearchModule
+            page={"results"}
+            cameraImage={this.cameraImage}
+            onSubmit={this.handleQuerySubmit}
+            handleFileUpload={this.handleFileUpload}
+          />
         </div>
         <div className="container-center-horizontal">
           <div style={{width: "10%"}} className="desktop-big"/>

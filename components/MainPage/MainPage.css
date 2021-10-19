@@ -244,83 +244,6 @@
   object-fit: cover;
   width: 222px;
 }
-.search {
-  letter-spacing: 0;
-  line-height: 26px;
-  min-height: 26px;
-  min-width: 64px;
-  mix-blend-mode: normal;
-  white-space: nowrap;
-}
-.search-all-nfts {
-  color: black;
-  font-family: var(--font-family-apercu_pro-medium);
-  font-size: var(--font-size-xl);
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: 26px;
-  margin-left: 9px;
-  min-height: 26px;
-  min-width: 800px;
-  mix-blend-mode: normal;
-  white-space: nowrap;
-  width: 800px;
-
-  border-width: 0;
-  border: none;
-}
-.search-all-nfts:focus {
-  border-width: 0;
-  border: none;
-  outline: none;
-}
-.search-box {
-  align-items: center;
-  background-color: var(--white);
-  border-radius: 12px;
-  display: flex;
-  height: 74px;
-  mix-blend-mode: normal;
-  overflow: hidden;
-  padding: 23.7px 23.2px;
-}
-.search-box-main {
-  width: 916px;
-}
-.search-components {
-  align-items: flex-start;
-  display: flex;
-  width: 1042px;
-}
-.search-components-main {
-  width: 1042px;
-}
-.search-components-url {
-  width: 100%;
-}
-.search-icon {
-  align-self: flex-start;
-  height: 25px;
-  mix-blend-mode: normal;
-  width: 25px;
-}
-.search-module-wrapper {
-  margin-top: 32px;
-  background-color: var(--light-grey);
-  border-radius: 20px;
-  width: 1090px;
-}
-.search-module {
-  align-items: flex-start;
-  display: flex;
-  height: 130px;
-  mix-blend-mode: normal;
-  overflow: hidden;
-  padding-top: 24px;
-  padding-left: 24px;
-  padding-right: 24px;
-  width: 1090px;
-}
 .text-2 {
   color: var(--black);
   font-family: var(--font-family-apercu_pro-medium);
@@ -354,22 +277,6 @@
   justify-content: center;
 }
 @media (max-width: 1800px) {
-  .search-components {
-    width: 100%;
-  }
-  .search-module, .search-module-wrapper {
-    width: 900px;
-  }
-  .search-box-main {
-    width: 100%;
-  }
-  .search {
-    min-width: 110px;
-  }
-  .search-all-nfts {
-    min-width: 300px;
-    width: 100%;
-  }
   .flex-col-7 {
     width: 800px;
   }
@@ -395,7 +302,7 @@
   .flex-col {
     margin-right: 30px;
   }
-  .flex-col-2, .flex-col-3, .flex-col-4,.flex-col-5, .flex-col-1, .flex-col {
+  .flex-col-2, .flex-col-3, .flex-col-4, .flex-col-5, .flex-col-1, .flex-col {
     width: 12.5vw;
   }
   .image-bottom {
@@ -422,9 +329,6 @@
   }
 }
 @media (max-width: 1200px) {
-  .search-module, .search-module-wrapper {
-    width: 700px;
-  }
   .flex-col-1, .flex-col {
     width: 0;
   }

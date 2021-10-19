@@ -9,9 +9,6 @@ import Privacy from "./components/Privacy";
 import {ethers} from "ethers"
 import {NftProvider, useNft} from "use-nft"
 
-console.log("ethers")
-console.log(ethers)
-// const fetcher = ["ethers", { ethers, provider: ethers.getDefaultProvider("mainnet", {alchemy: "ZW1tKx3hcZkd51cF8KU6vj5yqU4NLxhM"}) }]
 const fetcher = ["ethers", {
   ethers,
   provider: new ethers.providers.JsonRpcProvider("https://eth-mainnet.alchemyapi.io/v2/ZW1tKx3hcZkd51cF8KU6vj5yqU4NLxhM")

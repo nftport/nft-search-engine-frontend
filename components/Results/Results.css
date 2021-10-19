@@ -20,7 +20,6 @@
   mix-blend-mode: normal;
   overflow: hidden;
   padding: 0 22px;
-  width: 110px;
   cursor: pointer;
   text-align: center;
 }
@@ -105,17 +104,6 @@
   mix-blend-mode: normal;
   white-space: nowrap;
 }
-.search-box-results {
-  align-items: flex-start;
-  background-color: var(--wild-sand);
-  border-radius: 14px;
-  display: flex;
-  height: 60px;
-  mix-blend-mode: normal;
-  overflow: hidden;
-  padding: 10.7px 22.0px;
-  width: 50%;
-}
 .search-components-results {
   align-items: flex-start;
   display: flex;
@@ -127,22 +115,6 @@
   mix-blend-mode: normal;
   width: 24px;
   margin-top: 6px;
-}
-.search-module-results {
-  /*align-items: flex-end;*/
-  background-color: var(--white);
-  /*display: flex;*/
-  /*height: 93px;*/
-  margin-left: 1.5%;
-  padding-left: 1.5%;
-  padding-right: 1.5%;
-  mix-blend-mode: normal;
-  overflow: hidden;
-  /*position: absolute;*/
-  /*top: 0;*/
-  padding-top: 35px;
-  width: 80%;
-  border-radius: 20px;
 }
 .viktoria-bolonina {
   color: var(--black);
@@ -158,30 +130,6 @@
   /*white-space: nowrap;*/
   overflow: hidden;
   overflow-wrap: break-word;
-}
-.search-all-nfts-results {
-  color: black;
-  background-color: var(--wild-sand);
-  font-family: var(--font-family-apercu_pro-medium);
-  font-size: var(--font-size-xl);
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: 26px;
-  margin-left: 9px;
-  margin-top: 6px;
-  min-height: 26px;
-  /*min-width: 800px;*/
-  mix-blend-mode: normal;
-  white-space: nowrap;
-  width: 95%;
-
-  border-width: 0;
-  border: none;
-}
-.search-all-nfts-results:focus {
-  border-width: 0;
-  border: none;
-  outline: none;
 }
 .skeleton-image {
   height: 243px;
@@ -260,8 +208,5 @@
   }
   .g-nft-results {
     width: 15%;
-  }
-  .search-box-results {
-    width: 70%;
   }
 }
