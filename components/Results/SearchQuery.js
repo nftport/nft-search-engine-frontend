@@ -4,7 +4,7 @@ const backendUrl = "https://api.nftport.xyz/"
 const AuthToken = "a67edb4e-d737-4c17-96e1-5902f548d9f8"
 
 
-function search(searchQuery, searchType, pagination, setSearchResults) {
+function search(searchQuery, searchType, pagination, setSearchResults, extraFilters) {
   if (searchType === "text") {
     getSearch(
       "v0/search",
@@ -31,7 +31,10 @@ function search(searchQuery, searchType, pagination, setSearchResults) {
   }
   if (searchType === "counterfeit") {
     if (searchQuery.startsWith("http://") || searchQuery.startsWith("https://")) {
-      const requestBody = {url: searchQuery.trim()}
+      const requestBody = {url: searchQuery.trim(), limit: pagination.pageSize}
+      if (extraFilters) {
+        requestBody.filter_out_contract_address = extraFilters.filterAddress
+      }
       postSearch("v0/duplicates/urls", requestBody, pagination)
         .then(response => {
           const {searchResults, error} = mapDuplicateResults(response);
@@ -57,9 +60,9 @@ function searchCounterfeit(address, tokenId, chain, filterAddress, pagination, s
     })
 }
 
-function searchFile(file, searchType, pagination, setSearchResults) {
+function searchFile(file, searchType, pagination, setSearchResults, extraFilters) {
   if (searchType === "counterfeit") {
-    postFileSearch(file, pagination, "v0/duplicates")
+    postFileSearch(file, pagination, "v0/duplicates", extraFilters)
       .then(response => {
         const {searchResults, error} = mapDuplicateResults(response);
         setSearchResults(searchResults, error)
@@ -73,19 +76,26 @@ function searchFile(file, searchType, pagination, setSearchResults) {
   }
 }
 
-function postFileSearch(file, pagination, endpoint) {
-  const requestBody = {}
-  requestBody.page_size = pagination.pageSize
-  requestBody.page_number = pagination.pageNumber
+function postFileSearch(file, pagination, endpoint, extraFilters) {
+  const queryParams = {
+    page_size: pagination.pageSize,
+    page_number: pagination.pageNumber,
+    limit: pagination.pageSize,
+  }
+  if (extraFilters && extraFilters.filterAddress) {
+    queryParams.filter_out_contract_address = extraFilters.filterAddress
+  }
   const formData = new FormData();
   formData.append("file", file);
-  return fetch(backendUrl + endpoint, {
-    method: "POST",
-    body: formData,
-    headers: {
-      "Authorization": AuthToken
-    }
-  })
+  const url = backendUrl + endpoint + "?" + new URLSearchParams(queryParams)
+  return fetch(url,
+    {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Authorization": AuthToken
+      }
+    })
     .then(response => response.json())
     .then(json => {
       return json
@@ -139,7 +149,7 @@ function getSearch(endpoint, searchQuery, pagination, setSearchResults) {
           })
         })
       }
-      let reason = json.reason ? json.reason : null
+      let reason = json.error ? json.error : null
       //TODO: map results?
       setSearchResults(searchResults, reason)
     })
@@ -165,6 +175,8 @@ function mapDuplicateResults(json) {
   let error = json && json.error ? json.error || "SERVER_ERROR" : null
   if (error === "File download failed") {
     error = "DOWNLOAD_FAILED"
+  } else if (!error && !searchResults.length) {
+    error = "NO_RESULTS_FOUND"
   }
   return {searchResults, error};
 }

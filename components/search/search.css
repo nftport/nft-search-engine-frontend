@@ -45,6 +45,12 @@
   border-radius: 20px;
   width: 1090px;
 }
+.arrow-icon {
+  height: 30px;
+  mix-blend-mode: normal;
+  width: 25px;
+  padding-top: 16px;
+}
 .search-all-nfts:focus {
   border-width: 0;
   border: none;
@@ -93,6 +99,12 @@
   border-width: 0;
   border: none;
   outline: none;
+}
+.error-text {
+  margin-top: 20px;
+  color: red;
+  font-family: var(--font-family-apercu_pro-regular);
+  font-size: 20px;
 }
 .search {
   letter-spacing: 0;
@@ -150,24 +162,24 @@
   margin-right: 1.5%;
   margin-bottom: 30px;
 }
-
-.extra-filters-text {
-  color: var(--black);
-  font-family: var(--font-family-apercu_pro-regular);
-  padding-left: 30px;
-  font-size: 20px;
-}
 .form-separator-text {
   color: var(--black);
   font-family: var(--font-family-apercu_pro-regular);
   font-size: 20px;
   text-align: center;
 }
+.extra-filters-text {
+  padding-left: 30px;
+}
 .extra-filters-text-results {
+  margin-left: 3%;
+}
+.extra-filters-text, .extra-filters-text-results {
   color: var(--black);
   font-family: var(--font-family-apercu_pro-regular);
-  margin-left: 3%;
+  cursor: pointer;
   font-size: 20px;
+  margin-bottom: 20px;
 }
 .form-separator-text-results {
   color: var(--black);

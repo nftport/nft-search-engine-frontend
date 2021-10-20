@@ -63,45 +63,24 @@ class Results extends React.Component {
   }
 
 
-  handleFormInputChange = (event) => {
-    this.state.searchQuery = event.target.value
-    this.setState(this.state)
-  }
-
-  handleSubmit = async (event) => {
-    event.preventDefault();
-    if (!this.state.searching) {
-      this.setState({searching: true})
-      searchQueries.search(this.state.searchQuery, this.pagination, this.setSearchResults)
-    }
-  }
-
-  toggleFileUploader = () => {
-    this.setState({showFileUpload: !this.state.showFileUpload})
-  }
-
-  handleFileSearchSubmit = query => {
-    if (!this.state.searching) {
-      this.setState({searching: true})
-      searchQueries.search(query, this.pagination, this.setSearchResults)
-    }
-  }
-
-  handleQuerySubmit = (searchType, value) => {
+  handleQuerySubmit = (searchType, value, extraFilters) => {
     if (!this.state.searching) {
       this.setState({searching: true})
       if (searchType === "counterfeit" && typeof value === "object") {
+        window.history.pushState({}, null, `/results?type=${searchType}&address=${value.contractAddress}`
+          + `&token=${value.tokenId}&chain=${value.chain}&filter=${value.filterAddress}`);
         searchQueries.searchCounterfeit(value.contractAddress, value.tokenId, "ethereum", value.filterAddress, this.pagination, this.setSearchResults)
       } else {
-        searchQueries.search(value, searchType, this.pagination, this.setSearchResults)
+        window.history.pushState({}, null, `/results?type=${searchType}&query=${value}`);
+        searchQueries.search(value, searchType, this.pagination, this.setSearchResults, extraFilters)
       }
     }
   }
 
-  handleFileUpload = (searchType, file) => {
+  handleFileUpload = (searchType, file, extraFilters) => {
     if (!this.state.searching) {
       this.setState({searching: true})
-      searchQueries.searchFile(file, searchType, this.pagination, this.setSearchResults)
+      searchQueries.searchFile(file, searchType, this.pagination, this.setSearchResults, extraFilters)
     }
   }
 

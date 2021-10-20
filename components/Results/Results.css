@@ -198,13 +198,16 @@
   width: 100%;
   height: 300px;
   text-align: center;
-  display: flex;
+  /*display: flex;*/
   margin: auto;
   align-items: center;
   justify-content: center;
 
   font-family: var(--font-family-apercu_pro-regular);
   font-size: var(--font-size-xxxl);
+}
+.response-image {
+  height: 100%;
 }
 @media (max-width: 1800px) {
   .results {

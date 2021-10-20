@@ -1,3 +1,4 @@
+import {ethers} from "ethers"
 import React from "react";
 import "./search.css";
 import "./searchMobile.css";
@@ -8,6 +9,8 @@ class SearchModule extends React.Component {
 
   state = {
     showFileUpload: false,
+    showExtraFilters: false,
+    error: "",
     files: [],
     searchType: "text",
     value: "",
@@ -25,11 +28,17 @@ class SearchModule extends React.Component {
     this.setState({showFileUpload: !this.state.showFileUpload})
   }
 
+  toggleExpandFilters = () => {
+    this.setState({showExtraFilters: !this.state.showExtraFilters})
+  }
+
   handleSearchTypeChange = value => {
     this.setState({
       searchType: value,
       showFileUpload: false,
-      value: ""
+      value: "",
+      error: "",
+      urlValue: ""
     })
   }
 
@@ -40,7 +49,7 @@ class SearchModule extends React.Component {
 
   handleContractChange = event => {
     this.state.counterfeitSearch.contractAddress = event.target.value
-    this.setState({counterfeitSearch: this.state.counterfeitSearch})
+    this.setState({counterfeitSearch: this.state.counterfeitSearch, error: ""})
   }
 
   handleTokenChange = event => {
@@ -60,7 +69,7 @@ class SearchModule extends React.Component {
 
   handleUrlQueryChange = event => {
     this.state.urlValue = event.target.value
-    this.setState({urlValue: event.target.value})
+    this.setState({urlValue: event.target.value, error: ""})
   }
 
   handleQuerySubmit = event => {
@@ -68,16 +77,22 @@ class SearchModule extends React.Component {
     if (this.state.value) {
       this.props.onSubmit(this.state.searchType, this.state.value)
     } else if (this.state.urlValue) {
-      this.props.onSubmit(this.state.searchType, this.state.urlValue)
+      this.props.onSubmit(this.state.searchType, this.state.urlValue, {filterAddress: this.state.counterfeitSearch.filterAddress})
     } else if (this.state.searchType === "counterfeit"
       && this.state.counterfeitSearch.contractAddress
       && this.state.counterfeitSearch.tokenId) {
+      try {
+        ethers.utils.getAddress(this.state.counterfeitSearch.contractAddress)
+      } catch (e) {
+        this.setState({error: "Invalid contract address"})
+        return
+      }
       this.props.onSubmit(this.state.searchType, this.state.counterfeitSearch)
     }
   }
 
   handleFileUpload = file => {
-    this.props.handleFileUpload(this.state.searchType, file)
+    this.props.handleFileUpload(this.state.searchType, file, {filterAddress: this.state.counterfeitSearch.filterAddress})
   }
 
   render() {
@@ -148,6 +163,9 @@ class SearchModule extends React.Component {
                   />
                   <img onClick={this.toggleFileUploader} className="camera-image" src={this.props.cameraImage}/>
                 </div>
+                {this.state.error &&
+                <div className="error-text">{this.state.error}</div>
+                }
                 <div className={this.props.page ? "mobile search-box-results" : "mobile search-box search-box-main"}
                      style={{marginTop: "20px"}}>
                   <input
@@ -201,9 +219,9 @@ class SearchModule extends React.Component {
         </p>
         <FileUploadForm
           handleFileUpload={this.handleFileUpload}
-          handleSubmit={this.props.onSubmit}
+          // handleSubmit={this.props.onSubmit}
+          handleSubmit={this.handleQuerySubmit}
           handleQueryChange={this.handleUrlQueryChange}
-          onSubmit={this.handleQuerySubmit}
           resultsPage={this.props.page}
         />
       </>
@@ -212,8 +230,18 @@ class SearchModule extends React.Component {
       <>
         <div
           className={this.props.page ? "desktop extra-filters-text-results" : "desktop extra-filters-text"}
-          style={{marginTop: "20px"}}>Extra filters
+          style={{marginTop: "20px"}}
+          onClick={this.toggleExpandFilters}
+        >
+          Extra filters
+          {this.state.showExtraFilters ?
+            <img className="arrow-icon"
+                 src="https://storage.googleapis.com/nft-search/img/up-arrow.svg"/>
+            : <img className="arrow-icon"
+                   src="https://storage.googleapis.com/nft-search/img/down-arrow.svg"/>
+          }
         </div>
+        {this.state.showExtraFilters &&
         <div
           className={this.props.page ? "desktop search-box-results search-box-counterfeit-results" : "desktop search-box search-box-counterfeit"}
           style={this.props.page ? {marginTop: "20px"} : {margin: "30px"}}>
@@ -223,6 +251,7 @@ class SearchModule extends React.Component {
             value={this.state.counterfeitSearch.filterAddress} onChange={this.handleFilterAddressChange}
           />
         </div>
+        }
       </>
       }
     </div>;

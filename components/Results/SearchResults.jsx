@@ -22,6 +22,21 @@ class SearchResults extends React.Component {
       return <div id="results" className="overlap-group-results">
         <div className="error-response">
           {errors[reason]}
+          {reason === "NO_RESULTS_FOUND" ?
+            <div style={{height: "100%"}}>
+              <img
+                className="response-image"
+                src="https://storage.googleapis.com/nft-search/img/no-results.png"
+              />
+            </div>
+            : <div style={{height: "100%"}}>
+              <img
+                style={{marginTop: "100px"}}
+                className="response-image"
+                src="https://storage.googleapis.com/nft-search/img/error.png"
+              />
+            </div>
+          }
         </div>
       </div>
     }
@@ -29,12 +44,18 @@ class SearchResults extends React.Component {
       return <div id="results" className="overlap-group-results">
         <div className="error-response">
           Unexpected error! Try again later.
+          <div style={{height: "100%"}}>
+            <img
+              style={{marginTop: "100px"}}
+              className="response-image"
+              src="https://storage.googleapis.com/nft-search/img/error.png"
+            />
+          </div>
         </div>
       </div>
     }
     return <div id="results" className="overlap-group-results">
       <div className="error-response">
-        {errors["NO_RESULTS_FOUND"]}
       </div>
     </div>
   }
