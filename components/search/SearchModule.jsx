@@ -1,6 +1,8 @@
 import React from "react";
 import "./search.css";
+import "./searchMobile.css";
 import FileUploadForm from "../FileUploadForm";
+import SelectField from "./SelectField"
 
 class SearchModule extends React.Component {
 
@@ -23,10 +25,9 @@ class SearchModule extends React.Component {
     this.setState({showFileUpload: !this.state.showFileUpload})
   }
 
-  handleSearchTypeChange = event => {
-    this.state.searchType = event.target.value
+  handleSearchTypeChange = value => {
     this.setState({
-      searchType: event.target.value,
+      searchType: value,
       showFileUpload: false,
       value: ""
     })
@@ -50,7 +51,6 @@ class SearchModule extends React.Component {
   handleFilterAddressChange = event => {
     this.state.counterfeitSearch.filterAddress = event.target.value
     this.setState({counterfeitSearch: this.state.counterfeitSearch})
-    console.log(this.state.counterfeitSearch)
   }
 
   handleChainChange = event => {
@@ -101,8 +101,8 @@ class SearchModule extends React.Component {
                     value={this.state.value} onChange={this.handleQueryChange}
                   />
                   <input
-                    className="mobile search-all-nfts"
-                    placeholder="Search by keywords or image URL"
+                    className={this.props.page ? "mobile search-all-nfts-results" : "mobile search-all-nfts"}
+                    placeholder="Search by keywords"
                     value={this.state.value} onChange={this.handleQueryChange}
                   />
                 </div>
@@ -117,12 +117,12 @@ class SearchModule extends React.Component {
                        src="https://storage.googleapis.com/nft-search/img/search-icon%402x.svg"/>
                   <input
                     className={this.props.page ? "desktop search-all-nfts-results" : "desktop search-all-nfts"}
-                    placeholder="Search by keywords"
+                    placeholder="Visual search by keywords"
                     value={this.state.value} onChange={this.handleQueryChange}
                   />
                   <input
-                    className="mobile search-all-nfts"
-                    placeholder="Search by keywords or image URL"
+                    className={this.props.page ? "mobile search-all-nfts-results" : "mobile search-all-nfts"}
+                    placeholder="Visual search by keywords or image URL"
                     value={this.state.value} onChange={this.handleQueryChange}
                   />
                   <img onClick={this.toggleFileUploader} className="camera-image" src={this.props.cameraImage}/>
@@ -133,9 +133,14 @@ class SearchModule extends React.Component {
             {this.state.searchType === "counterfeit" &&
             <>
               <div className="search-box-main">
-                <div className={this.props.page ? "search-box-results" : "search-box"}>
+                <div className={this.props.page ? "search-box-results" : "search-box search-box-main"}>
                   <img className={this.props.page ? "search-icon-results" : "search-icon"}
                        src="https://storage.googleapis.com/nft-search/img/search-icon%402x.svg"/>
+                  <input
+                    className={this.props.page ? "mobile search-all-nfts-results" : "mobile search-all-nfts"}
+                    placeholder="Contract address"
+                    value={this.state.counterfeitSearch.contractAddress} onChange={this.handleContractChange}
+                  />
                   <input
                     className={this.props.page ? "desktop search-all-nfts-results" : "desktop search-all-nfts"}
                     placeholder="Contract address"
@@ -143,26 +148,47 @@ class SearchModule extends React.Component {
                   />
                   <img onClick={this.toggleFileUploader} className="camera-image" src={this.props.cameraImage}/>
                 </div>
+                <div className={this.props.page ? "mobile search-box-results" : "mobile search-box search-box-main"}
+                     style={{marginTop: "20px"}}>
+                  <input
+                    className={this.props.page ? "mobile search-all-nfts-results" : "mobile search-all-nfts"}
+                    placeholder="Token ID"
+                    value={this.state.counterfeitSearch.tokenId} onChange={this.handleTokenChange}
+                  />
+                </div>
+
+                <div
+                  className={this.props.page ? "mobile extra-filters-text-results" : "mobile extra-filters-text"}
+                  style={{marginTop: "20px"}}>Extra filters
+                </div>
+                <div
+                  className={this.props.page ? "mobile search-box-results search-box-counterfeit-results" : "mobile search-box search-box-counterfeit"}
+                >
+                  <input
+                    className={this.props.page ? "mobile search-all-nfts-results" : "mobile search-all-nfts"}
+                    placeholder="Contract address to filter out"
+                    value={this.state.counterfeitSearch.filterAddress} onChange={this.handleFilterAddressChange}
+                  />
+                </div>
+
+
               </div>
             </>
             }
-            <div className={this.props.page ? "search-select-wrapper-results" : "search-select-wrapper"}>
-              <select name="Search Type" className="search-type-select" onChange={this.handleSearchTypeChange}>
-                <option value="text">Text search</option>
-                <option value="reverse">Reverse Image Search</option>
-                <option value="counterfeit">Counterfeit Detection</option>
-              </select>
-            </div>
+            <SelectField
+              page={this.props.page}
+              onChange={this.handleSearchTypeChange}
+            />
             <input type="submit" value="Search" className={this.props.page ?
               "button-results search apercupro-medium-white-20px" : "button search apercupro-medium-white-20px"}/>
           </div>
         </div>
         {this.state.searchType === "counterfeit" &&
         <div
-          className={this.props.page ? "search-box-results search-box-counterfeit-results" : "search-box search-box-counterfeit"}>
+          className={this.props.page ? "desktop search-box-results search-box-counterfeit-results" : "desktop search-box search-box-counterfeit"}>
           <input
             className={this.props.page ? "desktop search-all-nfts-results" : "desktop search-all-nfts"}
-            placeholder="Token id"
+            placeholder="Token ID"
             value={this.state.counterfeitSearch.tokenId} onChange={this.handleTokenChange}
           />
         </div>
@@ -170,7 +196,9 @@ class SearchModule extends React.Component {
       </form>
       {this.state.showFileUpload &&
       <>
-        <p className="extra-filters-text" style={{textAlign: "center"}}>OR</p>
+        <p className="form-separator-text">
+          <span>OR</span>
+        </p>
         <FileUploadForm
           handleFileUpload={this.handleFileUpload}
           handleSubmit={this.props.onSubmit}
@@ -182,10 +210,13 @@ class SearchModule extends React.Component {
       }
       {this.state.searchType === "counterfeit" &&
       <>
-        <div className="extra-filters-text" style={{marginTop: "20px"}}>Extra filters</div>
         <div
-          className={this.props.page ? "search-box-results search-box-counterfeit-results" : "search-box search-box-counterfeit"}
-          style={this.props.page? {marginTop: "20px"} : {margin: "30px"}}>
+          className={this.props.page ? "desktop extra-filters-text-results" : "desktop extra-filters-text"}
+          style={{marginTop: "20px"}}>Extra filters
+        </div>
+        <div
+          className={this.props.page ? "desktop search-box-results search-box-counterfeit-results" : "desktop search-box search-box-counterfeit"}
+          style={this.props.page ? {marginTop: "20px"} : {margin: "30px"}}>
           <input
             className={this.props.page ? "desktop search-all-nfts-results" : "desktop search-all-nfts"}
             placeholder="Contract address to filter out"

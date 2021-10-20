@@ -43,6 +43,7 @@ class Results extends React.Component {
       this.setState({searching: true})
       searchQueries.search(this.state.searchQuery, this.state.searchType, this.pagination, this.setSearchResults)
     } else if (type === "counterfeit" && address && token && chain) {
+      this.setState({searching: true})
       searchQueries.searchCounterfeit(address, token, chain, filterAddress, this.pagination, this.setSearchResults)
     } else if (this.props.fileSearchInput && this.props.fileSearchInput.file && type) {
       this.setState({searching: true})
@@ -108,6 +109,7 @@ class Results extends React.Component {
   render() {
     return (
       <>
+        <div className="g-nft-results-smaller apercupro-medium-black-30px"><a href="/">Fingible</a></div>
         <div className="overlap-group-results-header">
           <div className="g-nft-results apercupro-medium-black-30px"><a href="/">Fingible</a></div>
           <SearchModule

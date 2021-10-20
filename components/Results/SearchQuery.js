@@ -14,7 +14,7 @@ function search(searchQuery, searchType, pagination, setSearchResults) {
     )
   } else if (searchType === "reverse") {
     if (searchQuery.startsWith("http://") || searchQuery.startsWith("https://")) {
-      const requestBody = {url: searchQuery}
+      const requestBody = {url: searchQuery.trim()}
       postSearch("v0/recommendations/similar_nfts/urls", requestBody, pagination)
         .then(response => {
           const {searchResults, error} = mapRecommendationResults(response);
@@ -31,7 +31,7 @@ function search(searchQuery, searchType, pagination, setSearchResults) {
   }
   if (searchType === "counterfeit") {
     if (searchQuery.startsWith("http://") || searchQuery.startsWith("https://")) {
-      const requestBody = {url: searchQuery}
+      const requestBody = {url: searchQuery.trim()}
       postSearch("v0/duplicates/urls", requestBody, pagination)
         .then(response => {
           const {searchResults, error} = mapDuplicateResults(response);
@@ -47,7 +47,8 @@ function searchCounterfeit(address, tokenId, chain, filterAddress, pagination, s
     "chain": chain,
     "contract_address": address,
     "token_id": tokenId,
-    "filter_out_contract_address": filterAddress
+    "filter_out_contract_address": filterAddress,
+    "limit": pagination.pageSize
   }
   postSearch("v0/duplicates/tokens", requestBody, pagination)
     .then(response => {
@@ -155,13 +156,16 @@ function mapDuplicateResults(json) {
         "chain": nft.chain,
         "contract_address": nft.contract_address,
         "token_id": nft.token_id,
-        "image_url": nft.file_url,
+        "image_url": (nft.cached_file_url ? nft.cached_file_url : nft.file_url),
         // "external_url": "https://rarible.com/token/0x60f80121c31a0d46b5279700f9df786054aa5ee5:801565",
         "raw_metadata": nft.metadata
       })
     })
   }
-  let error = json && json.error || "SERVER_ERROR"
+  let error = json && json.error ? json.error || "SERVER_ERROR" : null
+  if (error === "File download failed") {
+    error = "DOWNLOAD_FAILED"
+  }
   return {searchResults, error};
 }
 
@@ -179,7 +183,7 @@ function mapRecommendationResults(json) {
       })
     })
   }
-  let error = json && json.error || "SERVER_ERROR"
+  let error = json && json.error ? json.error || "SERVER_ERROR" : null
   return {searchResults, error};
 }
 

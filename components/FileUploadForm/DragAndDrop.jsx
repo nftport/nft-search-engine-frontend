@@ -22,7 +22,6 @@ class DragAndDrop extends Component {
     e.preventDefault()
     e.stopPropagation()
     this.dragCounter--
-    console.log(this.dragCounter)
     if (this.dragCounter === 0) {
       this.setState({drag: false})
     }

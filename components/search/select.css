@@ -1,0 +1,116 @@
+.search-select-wrapper {
+  width: 40%;
+  height: 74px;
+  line-height: 74px;
+  text-align: center;
+  padding-left: 20px;
+  font-family: var(--font-family-apercu_pro-regular);
+}
+.search-select-wrapper-results {
+  width: 40%;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  padding-left: 20px;
+  font-family: var(--font-family-apercu_pro-regular);
+}
+.type-option {
+  height: 30px;
+}
+
+.custom-select {
+  position: relative;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element:*/
+}
+
+.select-selected {
+  height: 100%;
+  width: 100%;
+  background: #FFFFFF;
+  border: 2px solid #000000;
+  box-sizing: border-box;
+  border-radius: 12px;
+  padding-right: 20px;
+  min-width: 200px;
+}
+.select-arrow-active {
+  /*border-bottom: 0;*/
+  border-radius: 12px;
+}
+.select-selected:hover {
+  cursor: pointer;
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: "";
+  /*top: 26px;*/
+  top: 50%;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border: 6px solid;
+  border-color: black transparent transparent transparent;
+}
+
+.select-arrow-active {
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent black transparent;
+  top: calc(50% - 7px);
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div {
+  padding: 8px 16px;
+  /*border: 1px solid transparent;*/
+  /*border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;*/
+  cursor: pointer;
+  user-select: none;
+}
+
+/*style items (options):*/
+.select-items {
+  margin-top: 8px;
+  margin-left: 20px;
+  position: absolute;
+  background-color: var(--white);
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  line-height: 40px;
+  border: 2px solid #000000;
+  border-radius: 12px;
+}
+
+.select-items div {
+  border-bottom: 1px solid var(--grey);
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .search-select-wrapper, .search-select-wrapper-results {
+    display: block;
+    margin: 20px auto;
+    width: 90%;
+    padding: 0;
+  }
+  .select-items {
+    margin: 0;
+  }
+}

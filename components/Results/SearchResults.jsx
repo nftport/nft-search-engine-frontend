@@ -3,7 +3,8 @@ import ResultNFT from "./ResultNFT";
 
 const errors = {
   NO_RESULTS_FOUND: "No results found! Try another search.",
-  SERVER_ERROR: "Server error! Try again later."
+  SERVER_ERROR: "Server error! Try again later.",
+  DOWNLOAD_FAILED: "File download failed! Try with another url."
 }
 
 class SearchResults extends React.Component {
@@ -33,6 +34,7 @@ class SearchResults extends React.Component {
     }
     return <div id="results" className="overlap-group-results">
       <div className="error-response">
+        {errors["NO_RESULTS_FOUND"]}
       </div>
     </div>
   }
