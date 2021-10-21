@@ -5,7 +5,6 @@ import "./ResultsMobile.css";
 import SearchResults from "./SearchResults";
 import searchQueries from "./SearchQuery";
 import SkeletonLoader from "./SkeletonLoader";
-import FileUploadForm from "../FileUploadForm";
 import SearchModule from "../search/SearchModule";
 
 
@@ -17,7 +16,13 @@ class Results extends React.Component {
   state = {
     searchQuery: "",
     searching: false,
-    reason: null
+    searchingPage: false,
+    reason: null,
+    searchParams: {
+      searchType: null,
+      value: null,
+      extraFilters: null
+    }
   }
   searchResults = null
 
@@ -50,6 +55,31 @@ class Results extends React.Component {
       const file = this.props.fileSearchInput.file
       searchQueries.searchFile(file, type, this.pagination, this.setSearchResults)
     }
+
+
+    window.addEventListener('scroll', () => {
+      const {
+        scrollTop,
+        scrollHeight,
+        clientHeight
+      } = document.documentElement;
+
+      //TODO: check if should load more as well
+      // if (scrollTop + clientHeight >= scrollHeight - 500 && !this.state.searching) {
+      if (scrollTop + clientHeight >= scrollHeight - 500 && !this.state.searchingPage && this.state.searchParams) {
+        this.setState({searchingPage: true})
+        this.pagination.pageNumber += 1
+        searchQueries.search(
+          this.state.searchParams.value,
+          this.state.searchParams.searchType,
+          this.pagination,
+          this.addSearchResults,
+          this.state.searchParams.extraFilters
+        )
+      }
+    }, {
+      passive: true
+    });
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -62,6 +92,16 @@ class Results extends React.Component {
     this.setState(this.searchResults)
   }
 
+  addSearchResults = (searchResults, reason) => {
+    console.log("Add search results")
+    this.setState({searchingPage: false})
+    this.setState({reason: reason})
+    if (this.searchResults && this.searchResults.length) {
+      this.searchResults.push(...searchResults)
+      this.setState(this.searchResults)
+    }
+  }
+
 
   handleQuerySubmit = (searchType, value, extraFilters) => {
     if (!this.state.searching) {
@@ -71,6 +111,13 @@ class Results extends React.Component {
           + `&token=${value.tokenId}&chain=${value.chain}&filter=${value.filterAddress}`);
         searchQueries.searchCounterfeit(value.contractAddress, value.tokenId, "ethereum", value.filterAddress, this.pagination, this.setSearchResults)
       } else {
+        this.setState({
+          searchParams: {
+            searchType: searchType,
+            value: value,
+            extraFilters: extraFilters
+          }
+        })
         window.history.pushState({}, null, `/results?type=${searchType}&query=${value}`);
         searchQueries.search(value, searchType, this.pagination, this.setSearchResults, extraFilters)
       }
@@ -101,20 +148,28 @@ class Results extends React.Component {
         <div className="container-center-horizontal">
           <div style={{width: "10%"}} className="desktop-big"/>
           <div className="results screen">
-
-            {this.state.searching
-              ? <SkeletonLoader/>
-              : <SearchResults searchResults={this.searchResults} reason={this.state.reason}/>
-            }
+            <div id="results" className="overlap-group-results">
+              {this.state.searching ?
+                <SkeletonLoader/> :
+                <SearchResults
+                  searchResults={this.searchResults}
+                  reason={this.state.reason}
+                />
+              }
+              {this.state.searchingPage &&
+              <SkeletonLoader/>
+              }
+            </div>
           </div>
           <div style={{width: "10%"}} className="desktop-big"/>
-
         </div>
+
         <Footer/>
       </>
 
     );
   }
+
 }
 
 export default Results;
