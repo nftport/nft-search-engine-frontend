@@ -14,6 +14,8 @@ class Results extends React.Component {
   cameraImage = "/img/camera.svg"
 
   state = {
+    mounted: false,
+
     searchQuery: "",
     searching: false,
     searchingPage: false,
@@ -22,7 +24,8 @@ class Results extends React.Component {
       searchType: null,
       value: null,
       extraFilters: null
-    }
+    },
+    hasNextPage: true
   }
   searchResults = null
 
@@ -45,10 +48,29 @@ class Results extends React.Component {
     if (query && type) {
       this.state.searchQuery = decodeURI(query)
       this.state.searchType = decodeURI(type)
-      this.setState({searching: true})
+      this.setState({
+        searching: true,
+        searchParams: {
+          searchType: this.state.searchType,
+          value: this.state.searchQuery,
+          extraFilters: {}
+        }
+      })
       searchQueries.search(this.state.searchQuery, this.state.searchType, this.pagination, this.setSearchResults)
     } else if (type === "counterfeit" && address && token && chain) {
-      this.setState({searching: true})
+      this.setState({
+        searching: true,
+        searchParams: {
+          searchType: this.state.searchType,
+          value: {
+            contractAddress: address,
+            tokenId: token,
+            chain: chain,
+            filterAddress: filterAddress
+          },
+          extraFilters: {}
+        }
+      })
       searchQueries.searchCounterfeit(address, token, chain, filterAddress, this.pagination, this.setSearchResults)
     } else if (this.props.fileSearchInput && this.props.fileSearchInput.file && type) {
       this.setState({searching: true})
@@ -56,7 +78,11 @@ class Results extends React.Component {
       searchQueries.searchFile(file, type, this.pagination, this.setSearchResults)
     }
 
+    this.setState({mounted: true})
+    this.addScrollEventListener();
+  }
 
+  addScrollEventListener() {
     window.addEventListener('scroll', () => {
       const {
         scrollTop,
@@ -64,18 +90,43 @@ class Results extends React.Component {
         clientHeight
       } = document.documentElement;
 
-      //TODO: check if should load more as well
-      // if (scrollTop + clientHeight >= scrollHeight - 500 && !this.state.searching) {
-      if (scrollTop + clientHeight >= scrollHeight - 500 && !this.state.searchingPage && this.state.searchParams) {
-        this.setState({searchingPage: true})
-        this.pagination.pageNumber += 1
-        searchQueries.search(
-          this.state.searchParams.value,
-          this.state.searchParams.searchType,
-          this.pagination,
-          this.addSearchResults,
-          this.state.searchParams.extraFilters
-        )
+      if (scrollTop + clientHeight >= scrollHeight - 500
+        && !this.state.searchingPage
+        && this.state.searchParams
+        && this.searchResults && this.searchResults.length
+        && this.state.hasNextPage) {
+        if (this.state.searchParams.value) {
+          this.setState({searchingPage: true})
+          this.pagination.pageNumber += 1
+          if (this.state.searchParams.value && typeof this.state.searchParams.value === "object") {
+            searchQueries.searchCounterfeit(
+              this.state.searchParams.value.contractAddress,
+              this.state.searchParams.value.tokenId,
+              this.state.searchParams.value.chain,
+              this.state.searchParams.value.filterAddress,
+              this.pagination,
+              this.addSearchResults
+            )
+          } else {
+            searchQueries.search(
+              this.state.searchParams.value,
+              this.state.searchParams.searchType,
+              this.pagination,
+              this.addSearchResults,
+              this.state.searchParams.extraFilters
+            )
+          }
+        } else if (this.state.searchParams.file) {
+          this.setState({searchingPage: true})
+          this.pagination.pageNumber += 1
+          searchQueries.searchFile(
+            this.state.searchParams.file,
+            this.state.searchParams.searchType,
+            this.pagination,
+            this.addSearchResults,
+            this.state.searchParams.extraFilters
+          )
+        }
       }
     }, {
       passive: true
@@ -93,12 +144,13 @@ class Results extends React.Component {
   }
 
   addSearchResults = (searchResults, reason) => {
-    console.log("Add search results")
     this.setState({searchingPage: false})
     this.setState({reason: reason})
-    if (this.searchResults && this.searchResults.length) {
+    if (this.searchResults && this.searchResults.length && searchResults && searchResults.length) {
       this.searchResults.push(...searchResults)
       this.setState(this.searchResults)
+    } else {
+      this.setState({hasNextPage: false})
     }
   }
 
@@ -106,7 +158,16 @@ class Results extends React.Component {
   handleQuerySubmit = (searchType, value, extraFilters) => {
     if (!this.state.searching) {
       this.setState({searching: true})
+      this.setState({hasNextPage: true})
+      this.pagination.pageNumber = 1;
       if (searchType === "counterfeit" && typeof value === "object") {
+        this.setState({
+          searchParams: {
+            searchType: searchType,
+            value: value,
+            extraFilters: extraFilters
+          }
+        })
         window.history.pushState({}, null, `/results?type=${searchType}&address=${value.contractAddress}`
           + `&token=${value.tokenId}&chain=${value.chain}&filter=${value.filterAddress}`);
         searchQueries.searchCounterfeit(value.contractAddress, value.tokenId, "ethereum", value.filterAddress, this.pagination, this.setSearchResults)
@@ -126,7 +187,16 @@ class Results extends React.Component {
 
   handleFileUpload = (searchType, file, extraFilters) => {
     if (!this.state.searching) {
+      this.pagination.pageNumber = 1;
+      this.setState({hasNextPage: true})
       this.setState({searching: true})
+      this.setState({
+        searchParams: {
+          searchType: searchType,
+          file: file,
+          extraFilters: extraFilters
+        }
+      })
       searchQueries.searchFile(file, searchType, this.pagination, this.setSearchResults, extraFilters)
     }
   }
@@ -138,12 +208,15 @@ class Results extends React.Component {
         <div className="g-nft-results-smaller apercupro-medium-black-30px"><a href="/">Fingible</a></div>
         <div className="overlap-group-results-header">
           <div className="g-nft-results apercupro-medium-black-30px"><a href="/">Fingible</a></div>
+          {this.state.mounted &&
           <SearchModule
             page={"results"}
             cameraImage={this.cameraImage}
             onSubmit={this.handleQuerySubmit}
             handleFileUpload={this.handleFileUpload}
           />
+          }
+
         </div>
         <div className="container-center-horizontal">
           <div style={{width: "10%"}} className="desktop-big"/>

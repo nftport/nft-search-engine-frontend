@@ -62,8 +62,7 @@ function searchCounterfeit(address, tokenId, chain, filterAddress, pagination, s
 
 function searchFile(file, searchType, pagination, setSearchResults, extraFilters) {
   if (searchType === "counterfeit") {
-    // postFileSearch(file, pagination, "v0/duplicates/files", extraFilters)
-    postFileSearch(file, pagination, "v0/duplicates", extraFilters)
+    postFileSearch(file, pagination, "v0/duplicates/files", extraFilters)
       .then(response => {
         const {searchResults, error} = mapDuplicateResults(response);
         setSearchResults(searchResults, error)
