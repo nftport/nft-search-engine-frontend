@@ -24,6 +24,9 @@ class SearchModule extends React.Component {
   }
 
 
+  componentDidMount() {
+  }
+
   toggleFileUploader = () => {
     this.setState({showFileUpload: !this.state.showFileUpload})
   }

@@ -11,15 +11,15 @@ class SearchResults extends React.Component {
 
   render() {
     if (this.props.searchResults != null && this.props.searchResults.length > 0) {
-      return <div id="results" className="overlap-group-results">
+      return <>
         {this.props.searchResults.map((nft, index) => (
           <ResultNFT key={index} nft={nft}/>
         ))}
-      </div>
+      </>
     }
     const reason = this.props.reason
     if (reason && errors[reason]) {
-      return <div id="results" className="overlap-group-results">
+      return <>
         <div className="error-response">
           {errors[reason]}
           {reason === "NO_RESULTS_FOUND" ?
@@ -38,10 +38,10 @@ class SearchResults extends React.Component {
             </div>
           }
         </div>
-      </div>
+      </>
     }
     if (reason) {
-      return <div id="results" className="overlap-group-results">
+      return <>
         <div className="error-response">
           Unexpected error! Try again later.
           <div style={{height: "100%"}}>
@@ -52,12 +52,12 @@ class SearchResults extends React.Component {
             />
           </div>
         </div>
-      </div>
+      </>
     }
-    return <div id="results" className="overlap-group-results">
+    return <>
       <div className="error-response">
       </div>
-    </div>
+    </>
   }
 }
 

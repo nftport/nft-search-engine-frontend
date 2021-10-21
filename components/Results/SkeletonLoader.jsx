@@ -8,7 +8,7 @@ class SkeletonLoader extends React.Component {
     for (let i = 0; i < 18; i++) {
       blocks.push("")
     }
-    return <div id="results" className="overlap-group-results">
+    return <>
       {blocks.map((block, index) => (
         <div className="nft-result" key={index}>
           <div>
@@ -18,7 +18,7 @@ class SkeletonLoader extends React.Component {
           <div className="skeleton-text loader"/>
         </div>
       ))}
-    </div>
+    </>
   }
 }
 

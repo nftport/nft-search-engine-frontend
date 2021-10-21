@@ -62,7 +62,7 @@ function searchCounterfeit(address, tokenId, chain, filterAddress, pagination, s
 
 function searchFile(file, searchType, pagination, setSearchResults, extraFilters) {
   if (searchType === "counterfeit") {
-    postFileSearch(file, pagination, "v0/duplicates", extraFilters)
+    postFileSearch(file, pagination, "v0/duplicates/files", extraFilters)
       .then(response => {
         const {searchResults, error} = mapDuplicateResults(response);
         setSearchResults(searchResults, error)
@@ -149,9 +149,11 @@ function getSearch(endpoint, searchQuery, pagination, setSearchResults) {
           })
         })
       }
-      let reason = json.error ? json.error : null
-      //TODO: map results?
-      setSearchResults(searchResults, reason)
+      let error = json.error ? json.error : null
+      if (error === "No results found") {
+        error = "NO_RESULTS_FOUND"
+      }
+      setSearchResults(searchResults, error)
     })
     .catch(response => {
       setSearchResults([], "SERVER_ERROR")
