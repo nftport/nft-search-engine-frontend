@@ -39,21 +39,21 @@
   cursor: pointer;
 }
 .drag-and-drop-label-results {
-  border-radius: 0 0 0 20px;
 }
 
 .drag-and-drop-label:hover {
   background-color: var(--grey);
 }
 .search-box-url-main {
-  width: 75%;
+  width: 100%;
 }
 .search-box-url-results {
-  width: 85%;
+  width: 100%;
+  background-color: var(--wild-sand);
 }
 @media only screen and (max-width: 1800px) {
   .file-upload-main {
-    max-width: 900px;
+    /*max-width: 900px;*/
   }
   .file-upload-half-left {
     width: 40%;

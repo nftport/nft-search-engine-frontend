@@ -5,6 +5,9 @@ function getExternalUrl(propsNft) {
   if (propsNft && propsNft.external_url) {
     return propsNft.external_url
   }
+  if (propsNft.chain === "polygon") {
+    return "https://opensea.io/assets/matic/" + propsNft.contract_address + "/" + propsNft.token_id
+  }
   return "https://opensea.io/assets/" + propsNft.contract_address + "/" + propsNft.token_id
 }
 

@@ -8,6 +8,9 @@
   .g-nft-results a {
     font-size: var(--font-size-xxxxl)
   }
+  .g-nft-results-smaller {
+    display: none;
+  }
   .search-module-results {
     padding: 0;
     margin: 30px 0 0 0;

@@ -1,0 +1,42 @@
+@media (max-width: 768px) {
+  .search-module-wrapper, .search-module {
+    width: 100%;
+    max-width: 100%;
+    background: transparent;
+    min-height: 200px;
+  }
+  .search-module {
+    margin: 0;
+    padding: 20px 0;
+    height: auto;
+    align-content: center;
+  }
+  .search-components-main {
+    display: block;
+    text-align: center;
+  }
+  .search-box-main, .search-box-counterfeit-results, .search-box-counterfeit, .extra-filters-text-results, .extra-filters-text {
+    width: 92%;
+    margin: 0 auto;
+  }
+  .search-box, .search-box-results {
+    background: var(--grey);
+  }
+  .search {
+    margin: 20px auto 0 auto;
+    width: 92%;
+    display: inline-block;
+  }
+  .search-all-nfts, .search-all-nfts-results {
+    min-width: 200px;
+    background: var(--grey);
+  }
+  .camera-image {
+    display: none;
+  }
+  .search-select-wrapper {
+    display: block;
+    margin: 20px auto;
+    width: 90%;
+  }
+}
