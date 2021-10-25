@@ -16,7 +16,7 @@
   height: 60px;
   mix-blend-mode: normal;
   overflow: hidden;
-  padding: 10px 20px;
+  padding: 8px 20px;
   width: 100%;
 }
 .search-box-main {
@@ -83,7 +83,7 @@
   letter-spacing: 0;
   line-height: 26px;
   margin-left: 9px;
-  margin-top: 6px;
+  margin-top: 8px;
   min-height: 26px;
   /*min-width: 800px;*/
   mix-blend-mode: normal;
@@ -99,6 +99,9 @@
   border-width: 0;
   border: none;
   outline: none;
+}
+.search-all-nfts-counterfeit {
+  margin-left: 0;
 }
 .error-text {
   margin-top: 20px;
@@ -187,11 +190,11 @@
   font-size: 20px;
 }
 .camera-image {
-  height: 39px;
+  height: 44px;
   margin-left: 7px;
   mix-blend-mode: normal;
   object-fit: cover;
-  width: 40px;
+  width: 45px;
   cursor: pointer;
 }
 .camera-image:hover {
@@ -200,7 +203,7 @@
 
 @media (max-width: 1800px) {
   .search-module, .search-module-wrapper {
-    width: 900px;
+    width: 1000px;
   }
   .search-components {
     width: 100%;

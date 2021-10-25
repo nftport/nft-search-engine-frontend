@@ -104,10 +104,13 @@
 }
 
 @media (max-width: 768px) {
+  .custom-select {
+    font-size: var(--font-size-xl);
+  }
   .search-select-wrapper, .search-select-wrapper-results {
     display: block;
     margin: 20px auto;
-    width: 90%;
+    width: 92%;
     padding: 0;
   }
   .select-items {

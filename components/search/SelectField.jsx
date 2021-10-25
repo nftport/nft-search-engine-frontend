@@ -25,7 +25,18 @@ class SelectField extends React.Component {
       /*for each element, create a new DIV that will act as the selected item:*/
       a = document.createElement("DIV");
       a.setAttribute("class", "select-selected");
-      a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+
+      if (this.props.selectType) {
+        const values = {
+          "text": "Text search",
+          "reverse": "Reverse Image Search",
+          "counterfeit": "Counterfeit Detection",
+        }
+        a.innerHTML = values[this.props.selectType];
+      } else {
+        a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+      }
+
       x[i].appendChild(a);
       /*for each element, create a new DIV that will contain the option list:*/
       b = document.createElement("DIV");
