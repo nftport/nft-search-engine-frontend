@@ -4,7 +4,20 @@ import "./FileUploadForm.css";
 
 class FileUploadForm extends React.Component {
 
-  state = {}
+  state = {
+    value: ""
+  }
+
+  componentDidMount() {
+    if (this.props.urlValue) {
+      this.setState({value: this.props.urlValue})
+    }
+  }
+
+  handleUrlChange = event => {
+    this.setState({value: event.target.value});
+    this.props.handleQueryChange(event);
+  }
 
   handleSubmit = event => {
     event.preventDefault();
@@ -47,7 +60,7 @@ class FileUploadForm extends React.Component {
               <input
                 className={this.props.resultsPage ? "search-all-nfts-results" : "search-all-nfts"}
                 placeholder="Enter image URL"
-                value={this.state.value} onChange={this.props.handleQueryChange}
+                value={this.state.value} onChange={this.handleUrlChange}
               />
             </div>
           </div>

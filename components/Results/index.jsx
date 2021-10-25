@@ -45,6 +45,10 @@ class Results extends React.Component {
     const chain = queryParams.get("chain");
     const filterAddress = queryParams.get("filter");
 
+    if (type) {
+      this.state.searchType = decodeURI(type)
+    }
+
     if (query && type) {
       this.state.searchQuery = decodeURI(query)
       this.state.searchType = decodeURI(type)
@@ -214,6 +218,8 @@ class Results extends React.Component {
             cameraImage={this.cameraImage}
             onSubmit={this.handleQuerySubmit}
             handleFileUpload={this.handleFileUpload}
+            selectType={this.state.searchType}
+            searchParams={this.state.searchParams}
           />
           }
 

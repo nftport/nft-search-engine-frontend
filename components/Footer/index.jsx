@@ -10,7 +10,7 @@ function Footer(props) {
         <div className="flex-col-footer">
           <div className="footer-links">
             <div className="icons-footer">
-              <a href="https://twitter.com/nft_port" target="_blank">
+              <a href="https://twitter.com/nftport_xyz" target="_blank">
                 <img className="combined-shape"
                      src="https://storage.googleapis.com/nft-search/img/combined-shape%402x.svg"/>
               </a>

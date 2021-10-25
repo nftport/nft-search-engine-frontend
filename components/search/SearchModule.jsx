@@ -8,6 +8,7 @@ import SelectField from "./SelectField"
 class SearchModule extends React.Component {
 
   state = {
+    mounted: false,
     showFileUpload: false,
     showExtraFilters: false,
     error: "",
@@ -23,8 +24,36 @@ class SearchModule extends React.Component {
     },
   }
 
-
   componentDidMount() {
+    if (this.props.selectType) {
+      this.state.searchType = this.props.selectType
+      this.handleSearchTypeChange(this.props.selectType)
+      if (this.props.searchParams && this.props.searchParams.value) {
+        const query = this.props.searchParams.value;
+        if (typeof query === "object" && query.contractAddress && query.tokenId) {
+          this.setState({
+            counterfeitSearch: {
+              contractAddress: query.contractAddress,
+              tokenId: query.tokenId,
+              chain: "ethereum",
+              filterAddress: query.filterAddress,
+            }
+          })
+        } else if (query && typeof query === "string") {
+          if (query.startsWith("http://") || query.startsWith("https://")) {
+            this.setState({
+              urlValue: query,
+              showFileUpload: true,
+            })
+          } else {
+            this.setState({value: this.props.searchParams.value})
+          }
+        }
+      }
+    }
+
+    this
+      .setState({mounted: true})
   }
 
   toggleFileUploader = () => {
@@ -110,12 +139,12 @@ class SearchModule extends React.Component {
             <>
               <div className="search-box-main">
                 <div
-                  className={this.props.page ? "search-box search-box-results" : "search-box search-box-main"}>
+                  className={this.props.page ? "search-box search-box-results" : "search-box"}>
                   <img className={this.props.page ? "search-icon-results" : "search-icon"}
                        src="https://storage.googleapis.com/nft-search/img/search-icon%402x.svg"/>
                   <input
                     className={this.props.page ? "desktop search-all-nfts-results" : "desktop search-all-nfts"}
-                    placeholder="Search by keywords"
+                    placeholder="Search by keywords from NFT name and description"
                     value={this.state.value} onChange={this.handleQueryChange}
                   />
                   <input
@@ -130,12 +159,12 @@ class SearchModule extends React.Component {
             {this.state.searchType === "reverse" &&
             <>
               <div className="search-box-main">
-                <div className={this.props.page ? "search-box search-box-results" : "search-box search-box-main"}>
+                <div className={this.props.page ? "search-box search-box-results" : "search-box"}>
                   <img className={this.props.page ? "search-icon-results" : "search-icon"}
                        src="https://storage.googleapis.com/nft-search/img/search-icon%402x.svg"/>
                   <input
                     className={this.props.page ? "desktop search-all-nfts-results" : "desktop search-all-nfts"}
-                    placeholder="Visual search by keywords"
+                    placeholder="Visual search from images by keywords"
                     value={this.state.value} onChange={this.handleQueryChange}
                   />
                   <input
@@ -151,7 +180,7 @@ class SearchModule extends React.Component {
             {this.state.searchType === "counterfeit" &&
             <>
               <div className="search-box-main">
-                <div className={this.props.page ? "search-box-results" : "search-box search-box-main"}>
+                <div className={this.props.page ? "search-box-results" : "search-box"}>
                   <img className={this.props.page ? "search-icon-results" : "search-icon"}
                        src="https://storage.googleapis.com/nft-search/img/search-icon%402x.svg"/>
                   <input
@@ -169,10 +198,10 @@ class SearchModule extends React.Component {
                 {this.state.error &&
                 <div className="error-text">{this.state.error}</div>
                 }
-                <div className={this.props.page ? "mobile search-box-results" : "mobile search-box search-box-main"}
+                <div className={this.props.page ? "mobile search-box-results" : "mobile search-box"}
                      style={{marginTop: "20px"}}>
                   <input
-                    className={this.props.page ? "mobile search-all-nfts-results" : "mobile search-all-nfts"}
+                    className={this.props.page ? "mobile search-all-nfts-results search-all-nfts-counterfeit" : "mobile search-all-nfts search-all-nfts-counterfeit"}
                     placeholder="Token ID"
                     value={this.state.counterfeitSearch.tokenId} onChange={this.handleTokenChange}
                   />
@@ -182,9 +211,7 @@ class SearchModule extends React.Component {
                   className={this.props.page ? "mobile extra-filters-text-results" : "mobile extra-filters-text"}
                   style={{marginTop: "20px"}}>Extra filters
                 </div>
-                <div
-                  className={this.props.page ? "mobile search-box-results search-box-counterfeit-results" : "mobile search-box search-box-counterfeit"}
-                >
+                <div className={this.props.page ? "mobile search-box-results" : "mobile search-box"}>
                   <input
                     className={this.props.page ? "mobile search-all-nfts-results" : "mobile search-all-nfts"}
                     placeholder="Contract address to filter out"
@@ -199,6 +226,7 @@ class SearchModule extends React.Component {
             <SelectField
               page={this.props.page}
               onChange={this.handleSearchTypeChange}
+              selectType={this.props.selectType}
             />
             <input type="submit" value="Search" className={this.props.page ?
               "button-results search apercupro-medium-white-20px" : "button search apercupro-medium-white-20px"}/>
@@ -208,7 +236,7 @@ class SearchModule extends React.Component {
         <div
           className={this.props.page ? "desktop search-box-results search-box-counterfeit-results" : "desktop search-box search-box-counterfeit"}>
           <input
-            className={this.props.page ? "desktop search-all-nfts-results" : "desktop search-all-nfts"}
+            className={this.props.page ? "desktop search-all-nfts-results search-all-nfts-counterfeit" : "desktop search-all-nfts search-all-nfts-counterfeit"}
             placeholder="Token ID"
             value={this.state.counterfeitSearch.tokenId} onChange={this.handleTokenChange}
           />
@@ -220,13 +248,15 @@ class SearchModule extends React.Component {
         <p className="form-separator-text">
           <span>OR</span>
         </p>
+        {this.state.mounted &&
         <FileUploadForm
           handleFileUpload={this.handleFileUpload}
-          // handleSubmit={this.props.onSubmit}
           handleSubmit={this.handleQuerySubmit}
           handleQueryChange={this.handleUrlQueryChange}
           resultsPage={this.props.page}
+          urlValue={this.state.urlValue}
         />
+        }
       </>
       }
       {this.state.searchType === "counterfeit" &&
@@ -247,9 +277,9 @@ class SearchModule extends React.Component {
         {this.state.showExtraFilters &&
         <div
           className={this.props.page ? "desktop search-box-results search-box-counterfeit-results" : "desktop search-box search-box-counterfeit"}
-          style={this.props.page ? {marginTop: "20px"} : {margin: "30px"}}>
+          style={this.props.page ? {marginTop: "20px"} : {}}>
           <input
-            className={this.props.page ? "desktop search-all-nfts-results" : "desktop search-all-nfts"}
+            className={this.props.page ? "desktop search-all-nfts-results search-all-nfts-counterfeit" : "desktop search-all-nfts search-all-nfts-counterfeit"}
             placeholder="Contract address to filter out"
             value={this.state.counterfeitSearch.filterAddress} onChange={this.handleFilterAddressChange}
           />

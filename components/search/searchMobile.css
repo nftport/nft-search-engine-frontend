@@ -15,10 +15,16 @@
     display: block;
     text-align: center;
   }
-  .search-box-main, .search-box-counterfeit-results, .search-box-counterfeit, .extra-filters-text-results, .extra-filters-text {
+  .search-box-main, .search-box-counterfeit-results, .extra-filters-text-results, .extra-filters-text {
     width: 92%;
     margin: 0 auto;
   }
+  .extra-filters-text, .extra-filters-text-results {
+    margin-bottom: 10px;
+    text-align: left;
+    padding-left: 0;
+  }
+
   .search-box, .search-box-results {
     background: var(--grey);
   }

@@ -135,6 +135,7 @@
   display: flex;
   /*height: 839px;*/
   min-width: 1266px;
+  margin-top: 40px;
 }
 .g-nft {
   color: var(--black);

@@ -57,12 +57,6 @@ class MainPage extends React.Component {
                     Built with NFTPort
                   </div>
                 </a>
-                <a href="https://www.nftport.xyz/" target="_blank" className="mobile">
-                  <div className="overlap-group api-button get-api-access">
-                    NFTPort
-                  </div>
-                </a>
-
               </div>
             </div>
 
