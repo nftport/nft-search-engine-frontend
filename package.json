@@ -5,7 +5,7 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
-    "core-js": "^3.12.1",
+    "core-js": "^3.18.2",
     "ethers": "^5.2.0",
     "parcel-bundler": "^1.12.4",
     "react": "^17.0.1",
