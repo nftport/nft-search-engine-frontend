@@ -3,7 +3,7 @@ https://fingible.nftport.xyz/
 
 ## Instructions
 ```
-cd package_code
+cp template.env .env
 npm install
 npm start
 ```
@@ -12,6 +12,5 @@ Open [http://localhost:1234](http://localhost:1234).
 ## Deployment
 ```
 npm run build
-delete all files from ("Sentinel Static websites" organization) gs://nft-search, except "img" folder
-put all files from project "dist" folder to gs://nft-search
 ```
+Serve all files from "dist" directory, index.html is the entrypoint

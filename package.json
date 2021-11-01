@@ -1,18 +1,19 @@
 {
-  "name": "react-package",
+  "name": "fingible",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "start": "env-cmd -f .env parcel index.html",
+    "build": "env-cmd -f .env parcel build index.html"
   },
   "dependencies": {
-    "core-js": "^3.12.1",
-    "ethers": "^5.2.0",
+    "core-js": "^3.18.2",
+    "env-cmd": "^10.1.0",
+    "ethers": "^5.4.7",
     "parcel-bundler": "^1.12.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-router-dom": "5.2.0",
-    "regenerator-runtime": "^0.13.7",
-    "use-nft": "^0.8.0"
+    "react-router-dom": "5.3.0",
+    "regenerator-runtime": "^0.13.8",
+    "use-nft": "^0.10.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
