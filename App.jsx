@@ -11,7 +11,7 @@ import {NftProvider, useNft} from "use-nft"
 
 const fetcher = ["ethers", {
   ethers,
-  provider: new ethers.providers.JsonRpcProvider("https://eth-mainnet.alchemyapi.io/v2/ZW1tKx3hcZkd51cF8KU6vj5yqU4NLxhM")
+  provider: new ethers.providers.JsonRpcProvider(process.env.ETHEREUM_RPC_URL)
 }]
 
 

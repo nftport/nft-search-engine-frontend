@@ -1,8 +1,6 @@
 const backendUrl = "https://api.nftport.xyz/"
-// const backendUrl = "http://localhost:80/"
 
-const AuthToken = "a67edb4e-d737-4c17-96e1-5902f548d9f8"
-
+const AuthToken = process.env.API_KEY
 
 function search(searchQuery, searchType, pagination, setSearchResults, extraFilters) {
   if (searchType === "text") {
