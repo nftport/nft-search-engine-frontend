@@ -7,7 +7,7 @@ class SelectField extends React.Component {
   componentDidMount() {
     const updateSelect = innerHTML => {
       const values = {
-        "Text search": "text",
+        "Text Search": "text",
         "Reverse Image Search": "reverse",
         "Counterfeit Detection": "counterfeit",
       }
@@ -28,7 +28,7 @@ class SelectField extends React.Component {
 
       if (this.props.selectType) {
         const values = {
-          "text": "Text search",
+          "text": "Text Search",
           "reverse": "Reverse Image Search",
           "counterfeit": "Counterfeit Detection",
         }
@@ -113,7 +113,7 @@ class SelectField extends React.Component {
     return <div
       className={this.props.page ? "search-select-wrapper-results custom-select" : "search-select-wrapper custom-select"}>
       <select name="Search Type" className="search-type-select" onChange={this.props.onChange}>
-        <option value="text" className="type-option">Text search</option>
+        <option value="text" className="type-option">Text Search</option>
         <option value="reverse" className="type-option">Reverse Image Search</option>
         <option value="counterfeit" className="type-option">Counterfeit Detection</option>
       </select>
