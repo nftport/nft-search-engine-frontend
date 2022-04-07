@@ -24,7 +24,7 @@ function Footer(props) {
           </div>
         </div>
         <div className="desktop flex-col-footer-center valign-text-middle text-1 apercupro-regular-normal-black-16px">
-          Copyright (c) 2021 NFTPort. All
+          Copyright (c) 2022 NFTPort. All
           rights reserved.
         </div>
         <div className="flex-col-footer-end">
@@ -40,7 +40,7 @@ function Footer(props) {
           </div>
         </div>
         <div className="mobile flex-col-footer-center valign-text-middle text-1 apercupro-regular-normal-black-16px">
-          Copyright (c) 2021 NFTPort. All
+          Copyright (c) 2022 NFTPort. All
           rights reserved.
         </div>
       </div>
