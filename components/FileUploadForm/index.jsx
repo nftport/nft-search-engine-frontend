@@ -39,10 +39,12 @@ class FileUploadForm extends React.Component {
   }
 
   render() {
-    return <div className={this.props.resultsPage ? "file-upload apercupro-medium-black-16px" : "file-upload file-upload-main apercupro-medium-black-16px"}>
-      <div className="file-upload-half file-upload-half-left">
+    return <div
+      className={this.props.resultsPage ? "file-upload apercupro-medium-black-16px" : "file-upload file-upload-main apercupro-medium-black-16px"}>
+      <div className={this.props.searchType === "counterfeit" ? "file-upload-half file-upload-half-left" : "file-upload"}>
         <DragAndDrop handleDrop={this.handleDrop}>
-          <label className={this.props.resultsPage ? "drag-and-drop-label center-vertically" : "drag-and-drop-label drag-and-drop-label-results center-vertically"}>
+          <label
+            className={this.props.resultsPage ? "drag-and-drop-label center-vertically" : "drag-and-drop-label drag-and-drop-label-results center-vertically"}>
             <span className="file-upload-button">Select a file</span>
             or drag it here
             <input type="file" name="file" className="file-upload-input center-vertically"
@@ -51,11 +53,12 @@ class FileUploadForm extends React.Component {
           </label>
         </DragAndDrop>
       </div>
-
+      {this.props.searchType === "counterfeit" &&
       <div className="file-upload-half file-upload-half-right center-vertically">
         <form className="file-upload-url-form" onSubmit={this.handleSubmit}>
           <div className="search-components search-components-url">
-            <div className={this.props.resultsPage ? "search-box search-box-url-results": "search-box search-box-url-main"}>
+            <div
+              className={this.props.resultsPage ? "search-box search-box-url-results" : "search-box search-box-url-main"}>
               <img className="search-icon" src="https://storage.googleapis.com/nft-search/img/search-icon%402x.svg"/>
               <input
                 className={this.props.resultsPage ? "search-all-nfts-results" : "search-all-nfts"}
@@ -66,6 +69,8 @@ class FileUploadForm extends React.Component {
           </div>
         </form>
       </div>
+      }
+
 
     </div>;
   }

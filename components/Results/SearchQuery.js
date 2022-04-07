@@ -11,21 +11,12 @@ function search(searchQuery, searchType, pagination, setSearchResults, extraFilt
       setSearchResults
     )
   } else if (searchType === "reverse") {
-    if (searchQuery.startsWith("http://") || searchQuery.startsWith("https://")) {
-      const requestBody = {url: searchQuery.trim()}
-      postSearch("v0/recommendations/similar_nfts/urls", requestBody, pagination)
-        .then(response => {
-          const {searchResults, error} = mapRecommendationResults(response);
-          setSearchResults(searchResults, error);
-        })
-    } else {
-      const requestBody = {query: searchQuery}
-      postSearch("visual_search", requestBody, pagination, setSearchResults)
-        .then(response => {
-          let {searchResults, reason} = mapVisualSearchResults(response);
-          setSearchResults(searchResults, reason)
-        })
-    }
+    const requestBody = {url: searchQuery.trim()}
+    postSearch("v0/recommendations/similar_nfts/urls", requestBody, pagination)
+      .then(response => {
+        const {searchResults, error} = mapRecommendationResults(response);
+        setSearchResults(searchResults, error);
+      })
   }
   if (searchType === "counterfeit") {
     if (searchQuery.startsWith("http://") || searchQuery.startsWith("https://")) {
@@ -196,18 +187,10 @@ function mapRecommendationResults(json) {
     })
   }
   let error = json && json.error ? json.error || "SERVER_ERROR" : null
-  return {searchResults, error};
-}
-
-function mapVisualSearchResults(response) {
-  const searchResults = []
-  if (response && response.images) {
-    response.images.forEach(imageObject => {
-      searchResults.push(imageObject)
-    })
+  if (json && json.error && json.error.code === "invalid_url") {
+    error = "INVALID_URL"
   }
-  let reason = response.reason ? response.reason : null
-  return {searchResults, reason};
+  return {searchResults, error};
 }
 
 
