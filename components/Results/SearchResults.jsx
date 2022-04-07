@@ -3,6 +3,7 @@ import ResultNFT from "./ResultNFT";
 
 const errors = {
   NO_RESULTS_FOUND: "No results found! Try another search.",
+  INVALID_URL: "Url format is invalid.",
   SERVER_ERROR: "Server error! Try again later.",
   DOWNLOAD_FAILED: "File download failed! Try with another url."
 }

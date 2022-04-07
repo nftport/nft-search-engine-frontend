@@ -164,12 +164,12 @@ class SearchModule extends React.Component {
                        src="https://storage.googleapis.com/nft-search/img/search-icon%402x.svg"/>
                   <input
                     className={this.props.page ? "desktop search-all-nfts-results" : "desktop search-all-nfts"}
-                    placeholder="Visual search from images by keywords"
+                    placeholder="Visual search by image URL"
                     value={this.state.value} onChange={this.handleQueryChange}
                   />
                   <input
                     className={this.props.page ? "mobile search-all-nfts-results" : "mobile search-all-nfts"}
-                    placeholder="Visual search by keywords or image URL"
+                    placeholder="Visual search by image URL"
                     value={this.state.value} onChange={this.handleQueryChange}
                   />
                   <img onClick={this.toggleFileUploader} className="camera-image" src={this.props.cameraImage}/>
@@ -255,6 +255,7 @@ class SearchModule extends React.Component {
           handleQueryChange={this.handleUrlQueryChange}
           resultsPage={this.props.page}
           urlValue={this.state.urlValue}
+          searchType={this.state.searchType}
         />
         }
       </>
