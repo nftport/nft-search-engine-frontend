@@ -105,7 +105,9 @@ class SearchModule extends React.Component {
   }
 
   handleQuerySubmit = event => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
+    } catch(error) { }
     if (this.state.value) {
       this.props.onSubmit(this.state.searchType, this.state.value)
     } else if (this.state.urlValue) {
