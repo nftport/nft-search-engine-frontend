@@ -5,7 +5,7 @@
     "build": "env-cmd -f .env parcel build index.html"
   },
   "dependencies": {
-    "core-js": "^3.18.2",
+    "core-js": "^3.19.1",
     "env-cmd": "^10.1.0",
     "ethers": "^5.4.7",
     "parcel-bundler": "^1.12.4",
