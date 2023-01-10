@@ -1,6 +1,4 @@
 # NFTPort search engine front end 
-https://fingible.nftport.xyz/
-
 
 ## Instructions
 ```
